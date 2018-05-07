@@ -13,12 +13,14 @@ import com.syc.framework.sycframework.view.adapter.AccountsAdapter
 /**
  * Created by shiyucheng on 2018/1/11.
  */
-class AccountsActivity : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding: ActivityAccountsBinding = DataBindingUtil.setContentView(this, R.layout.activity_accounts)
+class AccountsActivity : BaseActivity<ActivityAccountsBinding>() {
+    override fun getContent(): Int {
+        return R.layout.activity_accounts;
+    }
+
+    override fun initView(bundle: Bundle?) {
         val accounts: MutableList<Account> = mutableListOf()
-        val manager: RecyclerView.LayoutManager = LinearLayoutManager(baseContext)
+        val manager: RecyclerView.LayoutManager = LinearLayoutManager(this)
         val account = Account("aaa", "bbb", "ccc")
         accounts.add(account)
         binding.rvAccounts.layoutManager = manager

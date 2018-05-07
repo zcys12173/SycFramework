@@ -41,12 +41,9 @@ class LoginViewModel(context:Context) : BaseViewModel(context){
     }
 
     fun onAddClick(){
-//        var intent = Intent(context,RegisterActivity::class.java)
-//        context.startActivity(intent)
-
-        val intent = Intent()
-        intent.component = ComponentName(context, "com.syc.record.RecordListActivity")
+        var intent = Intent(context,RegisterActivity::class.java)
         context.startActivity(intent)
+
     }
 
 
