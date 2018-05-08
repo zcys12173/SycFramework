@@ -3,17 +3,12 @@ package com.syc.framework.sycframework.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.databinding.ObservableField
-import android.text.TextUtils
 import android.widget.Toast
+import com.syc.acount.view.AccountsActivity
+import com.syc.acount.view.SwipeBackTestActivity
 import com.syc.framework.database.DBManager
-import com.syc.framework.utils.LogUtil
-import com.syc.framework.utils.SharedPreferencesUtil
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.sycframework.model.User
-import com.syc.framework.sycframework.view.AccountsActivity
-import com.syc.framework.sycframework.view.RegisterActivity
-import android.content.ComponentName
-
 
 
 /**
@@ -41,14 +36,14 @@ class LoginViewModel(context:Context) : BaseViewModel(context){
     }
 
     fun onAddClick(){
-        var intent = Intent(context,RegisterActivity::class.java)
+        var intent = Intent(context, SwipeBackTestActivity::class.java)
         context.startActivity(intent)
 
     }
 
 
     fun goMainActivity(){
-        var intent:Intent = Intent(context,AccountsActivity::class.java)
+        var intent:Intent = Intent(context, AccountsActivity::class.java)
         context.startActivity(intent)
 
     }

@@ -1,4 +1,4 @@
-package com.syc.framework.sycframework.view
+package com.syc.acount.view
 
 import android.os.Bundle
 import com.syc.acount.R

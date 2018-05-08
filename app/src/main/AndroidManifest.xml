@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.syc.framework.sycframework">
+    package="com.syc.framework">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:name="com.syc.framework.framework.FrameworkApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.LoginActivity">
+        <activity android:name="com.syc.acount.view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,14 +18,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.RegisterActivity"
+        <activity android:name="com.syc.acount.view.RegisterActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.AccountsActivity"
+        <activity android:name="com.syc.acount.view.AccountsActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.NewAccountActivity"
+        <activity android:name="com.syc.acount.view.NewAccountActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name="com.syc.acount.view.SwipeBackTestActivity"/>
     </application>
 
 </manifest>
