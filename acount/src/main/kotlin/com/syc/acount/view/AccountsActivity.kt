@@ -14,7 +14,7 @@ import com.syc.framework.sycframework.view.adapter.AccountsAdapter
  */
 class AccountsActivity : BaseActivity<ActivityAccountsBinding>() {
     override fun getContent(): Int {
-        return R.layout.activity_accounts;
+        return R.layout.activity_accounts
     }
 
     override fun initView(bundle: Bundle?) {

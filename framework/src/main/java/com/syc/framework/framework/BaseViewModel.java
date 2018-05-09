@@ -3,6 +3,7 @@ package com.syc.framework.framework;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.BaseObservable;
+import android.os.Bundle;
 
 import java.lang.ref.WeakReference;
 
@@ -10,7 +11,7 @@ import java.lang.ref.WeakReference;
  * Created by shiyucheng on 2018/1/9.
  */
 
-public class BaseViewModel extends BaseObservable {
+public class BaseViewModel extends BaseObservable implements ViewModelLiftCycle {
     private WeakReference<Context> wrContext;
 
     public BaseViewModel(Context context) {
@@ -22,11 +23,43 @@ public class BaseViewModel extends BaseObservable {
         return wrContext.get();
     }
 
-    protected void oncreate() {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
 
     }
 
-    protected void onStop() {
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
+    }
+
+    @Override
+    public void onReStart() {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
 
     }
 
