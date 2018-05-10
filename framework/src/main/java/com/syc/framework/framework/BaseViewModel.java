@@ -8,10 +8,11 @@ import android.os.Bundle;
 import java.lang.ref.WeakReference;
 
 /**
+ *
  * Created by shiyucheng on 2018/1/9.
  */
 
-public class BaseViewModel extends BaseObservable implements ViewModelLiftCycle {
+public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle {
     private WeakReference<Context> wrContext;
 
     public BaseViewModel(Context context) {

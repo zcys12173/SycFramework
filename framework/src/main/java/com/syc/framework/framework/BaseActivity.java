@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -24,8 +25,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getContent());
-        SwipeBackLayout backLayout = getSwipeBackLayout();
-        backLayout.setEdgeSize(SwipeBackLayout.EDGE_LEFT);
         viewModelManager = new ViewModelManager();
         initView(savedInstanceState);
         viewModelManager.onCreate(savedInstanceState);

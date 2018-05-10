@@ -3,6 +3,7 @@ package com.syc.framework.framework;
 import android.app.Application;
 
 import com.syc.framework.database.DBManager;
+import com.syc.framework.imageloader.ImageLoader;
 import com.syc.framework.network.HttpManager;
 import com.syc.framework.network.config.HttpConfig;
 
@@ -22,5 +23,6 @@ public class FrameworkApplication extends Application {
         config.debug = true;
         HttpManager.getInstance().init(getApplicationContext(),config);
         DBManager.init(this);
+        ImageLoader.init(this);
     }
 }

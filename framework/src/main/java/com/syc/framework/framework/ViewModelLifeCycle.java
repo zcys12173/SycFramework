@@ -3,10 +3,10 @@ package com.syc.framework.framework;
 import android.os.Bundle;
 
 /**
- * Created by Administrator on 2018\5\9 0009.
+ * Created by shiyucheng on 2018\5\9 0009.
  */
 
-public interface ViewModelLiftCycle {
+public interface ViewModelLifeCycle {
     void onCreate(Bundle savedInstanceState);
 
     void onStart();
