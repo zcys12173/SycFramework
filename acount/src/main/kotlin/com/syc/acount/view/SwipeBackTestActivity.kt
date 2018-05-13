@@ -14,6 +14,6 @@ class SwipeBackTestActivity:SwipeBackActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_swipe_back)
         val view:DraweeView = findViewById(R.id.image) as DraweeView
-        ImageLoader.getInstance().loadImage("https://img-blog.csdn.net/20161112180545080",view)
+        ImageLoader.getInstance().loadImage(view,"https://img-blog.csdn.net/20161112180545080")
     }
 }

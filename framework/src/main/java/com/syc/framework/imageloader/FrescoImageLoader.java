@@ -27,24 +27,42 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.syc.framework.imageloader.listener.ImageLoaderListener;
+import com.syc.framework.imageloader.listener.LoadImageListener;
 import com.syc.framework.utils.LogUtil;
 
 import javax.annotation.Nullable;
 
 /**
- * Created by Administrator on 2018\5\10 0010.
+ * https://www.jianshu.com/p/8ff81be83101
+ * Created by shiyucheng on 2018\5\10 0010.
  */
 
 public class FrescoImageLoader {
+    /**
+     * 加载网络图片
+     */
+    void loadImage(SimpleDraweeView view, String url,int reqWidth,
+                   int reqHeight,
+                   ImageProcessor postprocessor,
+                   ImageLoaderListener<ImageInfo> controllerListener,
+                   boolean isSmall) {
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
+        Uri uri = Uri.parse(url);
+        if (uri != null) {
+            loadImage(view, uri, reqWidth, reqHeight, postprocessor, controllerListener, isSmall);
+        }
+    }
 
-
-    public static void loadImage(SimpleDraweeView simpleDraweeView,
-                                 Uri uri,
-                                 final int reqWidth,
-                                 final int reqHeight,
-                                 BasePostprocessor postprocessor,
-                                 ControllerListener<ImageInfo> controllerListener,
-                                 boolean isSmall) {
+    void loadImage(SimpleDraweeView simpleDraweeView,
+                          Uri uri,
+                   final int reqWidth,
+                   final int reqHeight,
+                   BasePostprocessor postprocessor,
+                   ControllerListener<ImageInfo> controllerListener,
+                   boolean isSmall) {
 
         ImageRequestBuilder imageRequestBuilder = ImageRequestBuilder.newBuilderWithSource(uri);
         imageRequestBuilder.setRotationOptions(RotationOptions.autoRotate());
@@ -83,40 +101,41 @@ public class FrescoImageLoader {
         DraweeController draweeController = draweeControllerBuilder.setControllerListener(new ControllerListener<ImageInfo>() {
             @Override
             public void onSubmit(String id, Object callerContext) {
-                LogUtil.d("FrescoImageLoader","onSubmit");
+                LogUtil.d("FrescoImageLoader", "onSubmit");
             }
 
             @Override
             public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
-                LogUtil.d("FrescoImageLoader","onFinalImageSet");
+                LogUtil.d("FrescoImageLoader", "onFinalImageSet");
             }
 
             @Override
             public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
-                LogUtil.d("FrescoImageLoader","onIntermediateImageSet");
+                LogUtil.d("FrescoImageLoader", "onIntermediateImageSet");
             }
 
             @Override
             public void onIntermediateImageFailed(String id, Throwable throwable) {
-                LogUtil.d("FrescoImageLoader","onIntermediateImageFailed");
+                LogUtil.d("FrescoImageLoader", "onIntermediateImageFailed");
             }
 
             @Override
             public void onFailure(String id, Throwable throwable) {
-                LogUtil.d("FrescoImageLoader","onFailure");
+                LogUtil.d("FrescoImageLoader", "onFailure");
             }
 
             @Override
             public void onRelease(String id) {
-                LogUtil.d("FrescoImageLoader","onRelease");
+                LogUtil.d("FrescoImageLoader", "onRelease");
             }
         }).build();
         simpleDraweeView.setController(draweeController);
     }
+
     /**
      * 从本地文件或网络获取Bitmap
      */
-    public static void loadImage(final Context context,
+    public static void getBitmap(final Context context,
                                  String url,
                                  final int reqWidth,
                                  final int reqHeight,
