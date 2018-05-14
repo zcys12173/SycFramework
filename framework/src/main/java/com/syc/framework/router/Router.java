@@ -1,9 +1,8 @@
 package com.syc.framework.router;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
-
-import com.syc.framework.router.listener.RouterListener;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -16,12 +15,13 @@ import java.util.Map;
 
 public class Router {
     private static Router instance;
+
     private Router() {
     }
 
-    public static Router getInstance(){
-        if(instance == null) synchronized (Router.class){
-            if(instance == null){
+    public static Router getInstance() {
+        if (instance == null) synchronized (Router.class) {
+            if (instance == null) {
                 instance = new Router();
             }
         }
@@ -29,38 +29,60 @@ public class Router {
     }
 
 
-    private HashMap<String,RouterListener> routerMaps = new HashMap<String,RouterListener>();
+    private HashMap<String, RouterRule> routerMaps = new HashMap<String, RouterRule>();
 
-    public void register(Builder builder) {
-        routerMaps.put(builder.uri, builder.getListener());
+    public void register(String uri, RouterRule routerRule) {
+        routerMaps.put(uri, routerRule);
     }
 
-    public void router(Context context) {
-//        for (Map.Entry<String, RouterListener> entry : routerMaps.entrySet()) {
-//            String uriKey = entry.getKey();
-//            RouterListener listener = entry.getValue();
-//            if (TextUtils.equals(uri, uriKey)) {
-//                listener.onFinish(context);
-//            }
-//        }
+    public void router(Builder builder) {
+        for (Map.Entry<String, RouterRule> entry : routerMaps.entrySet()) {
+            String uri = entry.getKey();
+            if (TextUtils.equals(uri, builder.getUri())) {
+                RouterRule routerRule = entry.getValue();
+                if (routerRule != null) {
+                    Pipe pipe = new Pipe();
+                    pipe.setCallBack(builder.getCallBack());
+                    pipe.setBundle(builder.getBundle());
+                    pipe.setContext(builder.getContext());
+                    routerRule.onRouter(pipe);
+                    break;//如果注册多个执行第一个注册的
+                }
+            }
+
+
+        }
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     public static class Builder {
         private WeakReference<Context> context;
         private String uri;
-        private RouterListener listener;
         private Router router;
-        public Builder(Context context) {
+        private PipeCallBack callBack;
+        private Bundle bundle;
+
+        public Builder from(Context context) {
             this.context = new WeakReference<Context>(context);
+            return this;
         }
 
-        public Builder uri(String uri){
+        public Builder uri(String uri) {
             this.uri = uri;
             return this;
         }
 
-        public Builder setRouterListener(RouterListener listener){
-            this.listener = listener;
+        public Builder params(Bundle bundle) {
+            this.bundle = bundle;
+            return this;
+        }
+
+
+        public Builder callBack(PipeCallBack callBack) {
+            this.callBack = callBack;
             return this;
         }
 
@@ -72,16 +94,20 @@ public class Router {
             return uri;
         }
 
-        public RouterListener getListener() {
-            return listener;
-        }
-
         public Router getRouter() {
             return router;
         }
 
-        public void build(){
-            Router.getInstance().register(this);
+        public PipeCallBack getCallBack() {
+            return callBack;
+        }
+
+        public Bundle getBundle() {
+            return bundle;
+        }
+
+        public void buildAndRouter() {
+            Router.getInstance().router(this);
         }
 
     }
