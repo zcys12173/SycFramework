@@ -35,6 +35,8 @@
             android:screenOrientation="portrait" />
 
         <activity android:name="com.syc.acount.view.SwipeBackTestActivity" />
+
+        <activity android:name="com.example.business.view.BusinessMainActivity"/>
     </application>
 
 </manifest>

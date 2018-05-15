@@ -9,6 +9,7 @@ import com.syc.acount.view.AccountsActivity
 import com.syc.framework.database.DBManager
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.router.Router
+import com.syc.framework.router.annotation.RouterSubscribe
 import com.syc.framework.sycframework.model.User
 import com.syc.framework.utils.LogUtil
 
@@ -41,9 +42,10 @@ class LoginViewModel(context: Context) : BaseViewModel(context) {
     fun onAddClick() {
         val bundle = Bundle()
         bundle.putString("age", "18")
-        Router.newBuilder().uri("/account/SwipeBackTestActivityOpen").from(context).callBack({ bundle ->
+        Router.newBuilder().uri("/business/BusinessMainActivityOpen").from(context).callBack({ bundle ->
             LogUtil.d("上一个页面返回数据", bundle.getString("name"))
         }).params(bundle).buildAndRouter()
+
     }
 
 
@@ -51,5 +53,10 @@ class LoginViewModel(context: Context) : BaseViewModel(context) {
         var intent: Intent = Intent(context, AccountsActivity::class.java)
         context.startActivity(intent)
 
+    }
+
+    @RouterSubscribe(uri = "login/annoTest")
+    fun onAnnotationTest(bundle: Bundle) {
+        Toast(bundle.getString("anno"))
     }
 }

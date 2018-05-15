@@ -1,12 +1,14 @@
-package com.syc.framework.router;
+package com.syc.framework.router.pipe;
 
 import android.content.Context;
 import android.os.Bundle;
 
+import com.syc.framework.router.listener.PipeCallBack;
+
 import java.lang.ref.WeakReference;
 
 /**
- * Created by Administrator on 2018\5\14 0014.
+ * Created by shiyucheng on 2018\5\14 0014.
  */
 
 public class Pipe {

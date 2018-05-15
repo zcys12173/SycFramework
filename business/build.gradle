@@ -1,30 +1,30 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
-
 apply plugin: 'realm-android'
-
 android {
     compileSdkVersion 26
+
     defaultConfig {
-        applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFile 'proguard-rules.pro'
+            }
         }
     }
     repositories {
@@ -40,12 +40,14 @@ android {
     kapt {
         generateStubs = true
     }
-    sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/kotlin/'] } }
+    sourceSets { main { java.srcDirs = ['src/main/kotlin', 'src/main/java', 'src/main/kotlin/'] } }
 }
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api project(':acount')
+    api project(':framework')
     kapt "com.android.databinding:compiler:3.0.1"
-    implementation project(':business')
+}
+repositories {
+    mavenCentral()
 }

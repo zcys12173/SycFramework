@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.syc.framework.router.Router;
 
 import java.lang.ref.WeakReference;
 
@@ -26,7 +29,7 @@ public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        Router.getInstance().registerReceiver(this);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle 
 
     @Override
     public void onDestroy() {
-
+        Router.getInstance().unRegisterReceiver(this);
     }
 
     @Override
@@ -67,6 +70,12 @@ public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle 
     protected void finish() {
         if (wrContext.get() != null) {
             ((Activity) wrContext.get()).finish();
+        }
+    }
+
+    protected void Toast(String message){
+        if (wrContext.get() != null) {
+            Toast.makeText(wrContext.get(), message, Toast.LENGTH_SHORT).show();
         }
     }
 }

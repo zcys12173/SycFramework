@@ -4,7 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.syc.framework.router.annotation.RouterSubscribe;
+import com.syc.framework.router.listener.PipeCallBack;
+import com.syc.framework.router.pipe.Pipe;
+
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +32,42 @@ public class Router {
         }
         return instance;
     }
+
+    public void broadcast(String uri, Bundle bundle) {
+        for (Map.Entry<String, Receiver> entry : receivers.entrySet()) {
+            if (TextUtils.equals(uri, entry.getKey())) {
+                Receiver receiver = entry.getValue();
+                receiver.invoke(bundle);
+            }
+
+        }
+    }
+
+    public void registerReceiver(Object obj) {
+        Method[] methods = obj.getClass().getMethods();
+        for (Method method : methods) {
+            RouterSubscribe subscribe = method.getAnnotation(RouterSubscribe.class);
+            if (subscribe != null) {
+                Receiver receiver = new Receiver();
+                receiver.setObject(obj);
+                receiver.setMethod(method);
+                receivers.put(subscribe.uri(), receiver);
+            }
+        }
+    }
+
+
+    public void unRegisterReceiver(Object obj) {
+        for (Map.Entry<String, Receiver> entry : receivers.entrySet()) {
+            Receiver receiver = entry.getValue();
+            if (receiver.getObject() == obj) {
+                receivers.remove(entry.getKey());
+            }
+
+        }
+    }
+
+    private HashMap<String, Receiver> receivers = new HashMap<>();
 
 
     private HashMap<String, RouterRule> routerMaps = new HashMap<String, RouterRule>();
