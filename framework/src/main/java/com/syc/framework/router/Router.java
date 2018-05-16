@@ -39,7 +39,6 @@ public class Router {
                 Receiver receiver = entry.getValue();
                 receiver.invoke(bundle);
             }
-
         }
     }
 
@@ -49,7 +48,7 @@ public class Router {
             RouterSubscribe subscribe = method.getAnnotation(RouterSubscribe.class);
             if (subscribe != null) {
                 Receiver receiver = new Receiver();
-                receiver.setObject(obj);
+                receiver.setClazz(obj.getClass());
                 receiver.setMethod(method);
                 receivers.put(subscribe.uri(), receiver);
             }
@@ -60,7 +59,7 @@ public class Router {
     public void unRegisterReceiver(Object obj) {
         for (Map.Entry<String, Receiver> entry : receivers.entrySet()) {
             Receiver receiver = entry.getValue();
-            if (receiver.getObject() == obj) {
+            if (receiver.getClazz() == obj.getClass()) {
                 receivers.remove(entry.getKey());
             }
 

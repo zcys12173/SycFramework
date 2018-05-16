@@ -1,5 +1,6 @@
 package com.syc.framework.router;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -8,32 +9,36 @@ import java.lang.reflect.Method;
  */
 
 public class Receiver {
-    private Object object;
-    private Method method;
+    private Class<?> clazz;
+    private WeakReference<Method> method;
+
     public void invoke(Object... params){
-        if(method != null){
+        if(method != null  && method.get() != null){
             try {
-                method.invoke(object,params);
+                method.get().invoke(clazz.newInstance(),params);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
+            } catch (InstantiationException e){
+                e.printStackTrace();
             }
         }
     }
-    public Object getObject() {
-        return object;
+
+    public Class<?> getClazz() {
+        return clazz;
     }
 
-    public void setObject(Object object) {
-        this.object = object;
+    public void setClazz(Class<?> clazz) {
+        this.clazz = clazz;
     }
 
     public Method getMethod() {
-        return method;
+        return method.get();
     }
 
     public void setMethod(Method method) {
-        this.method = method;
+        this.method = new WeakReference<Method>(method);
     }
 }

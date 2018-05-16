@@ -1,6 +1,5 @@
 package com.syc.framework.sycframework.viewmodel
 
-import android.content.Context
 import android.databinding.ObservableField
 import com.syc.framework.database.DBManager
 import com.syc.framework.framework.BaseViewModel
@@ -14,7 +13,7 @@ import io.realm.Realm
 /**
  * Created by shiyucheng on 2018/1/15.
  */
-class NewAccountViewModel(context: Context) : BaseViewModel(context) {
+class NewAccountViewModel : BaseViewModel() {
     var title: ObservableField<String> = ObservableField()
     var userName: ObservableField<String> = ObservableField()
     var password: ObservableField<String> = ObservableField()

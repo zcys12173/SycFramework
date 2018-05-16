@@ -1,6 +1,5 @@
 package com.syc.framework.sycframework.viewmodel
 
-import android.content.Context
 import android.content.Intent
 import android.databinding.ObservableField
 import android.os.Bundle
@@ -17,7 +16,7 @@ import com.syc.framework.utils.LogUtil
 /**
  * Created by shiyucheng on 2018/1/10.
  */
-class LoginViewModel(context: Context) : BaseViewModel(context) {
+class LoginViewModel : BaseViewModel() {
     var userName: ObservableField<String> = ObservableField()
     var password: ObservableField<String> = ObservableField()
 
@@ -40,6 +39,7 @@ class LoginViewModel(context: Context) : BaseViewModel(context) {
     }
 
     fun onAddClick() {
+        Toast("onAddClick")
         val bundle = Bundle()
         bundle.putString("age", "18")
         Router.newBuilder().uri("/business/BusinessMainActivityOpen").from(context).callBack({ bundle ->

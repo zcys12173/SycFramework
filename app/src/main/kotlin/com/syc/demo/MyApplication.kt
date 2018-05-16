@@ -1,7 +1,7 @@
 package com.syc.demo
 
 import com.example.business.BusinessModule
-import com.syc.acount.AcountModule
+import com.syc.acount.AccountModule
 import com.syc.framework.framework.FrameworkApplication
 
 /**
@@ -10,7 +10,7 @@ import com.syc.framework.framework.FrameworkApplication
 class MyApplication : FrameworkApplication() {
     override fun onCreate() {
         super.onCreate()
-        AcountModule.install()
+        AccountModule.install()
         BusinessModule.install()
     }
 }

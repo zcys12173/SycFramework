@@ -15,8 +15,9 @@ public class ViewModelFactory {
         T viewModel = null;
 
             try {
-                Constructor<T> constructor = clazz.getDeclaredConstructor(Context.class);
-                viewModel = constructor.newInstance(context);
+                Constructor<T> constructor = clazz.getDeclaredConstructor();
+                viewModel = constructor.newInstance();
+                viewModel.setContext(context);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {

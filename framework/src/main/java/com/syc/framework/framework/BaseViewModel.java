@@ -18,7 +18,11 @@ import java.lang.ref.WeakReference;
 public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle {
     private WeakReference<Context> wrContext;
 
-    public BaseViewModel(Context context) {
+    public BaseViewModel() {
+
+    }
+
+    public void setContext(Context context){
         this.wrContext = new WeakReference<Context>(context);
     }
 

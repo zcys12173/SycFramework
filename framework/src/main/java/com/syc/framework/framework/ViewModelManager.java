@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * Created by shiyucheng on 2018\5\9 0009.
  */
 
@@ -20,49 +19,66 @@ public class ViewModelManager {
 
     void onCreate(Bundle savedInstanceState) {
         for (BaseViewModel item : viewModels) {
-            item.onCreate(savedInstanceState);
+            if (item != null) {
+                item.onCreate(savedInstanceState);
+            }
+
         }
     }
 
     void onStart() {
         for (BaseViewModel item : viewModels) {
-            item.onStart();
+            if (item != null) {
+                item.onStart();
+            }
         }
     }
 
     void onReStart() {
         for (BaseViewModel item : viewModels) {
-            item.onReStart();
+            if (item != null) {
+                item.onReStart();
+            }
         }
     }
 
     void onPause() {
         for (BaseViewModel item : viewModels) {
-            item.onPause();
+            if (item != null) {
+                item.onPause();
+            }
         }
     }
 
     void onResume() {
         for (BaseViewModel item : viewModels) {
-            item.onResume();
+            if (item != null) {
+                item.onResume();
+            }
         }
     }
 
     void onStop() {
         for (BaseViewModel item : viewModels) {
-            item.onStop();
+            if (item != null) {
+                item.onStop();
+            }
         }
     }
 
     void onDestroy() {
         for (BaseViewModel item : viewModels) {
-            item.onDestroy();
+            if (item != null) {
+                item.onDestroy();
+            }
         }
     }
 
     void onSaveInstanceState(Bundle outState) {
         for (BaseViewModel item : viewModels) {
-            item.onSaveInstanceState(outState);
+            if (item != null) {
+                item.onSaveInstanceState(outState);
+            }
         }
     }
 

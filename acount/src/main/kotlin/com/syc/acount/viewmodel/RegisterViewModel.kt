@@ -1,6 +1,5 @@
 package com.syc.framework.sycframework.viewmodel
 
-import android.content.Context
 import android.databinding.ObservableField
 import android.text.TextUtils
 import android.widget.Toast
@@ -11,7 +10,7 @@ import com.syc.framework.sycframework.model.User
 /**
  * Created by shiyucheng on 2018/1/10.
  */
-class RegisterViewModel(context: Context) : BaseViewModel(context) {
+class RegisterViewModel : BaseViewModel() {
     var userName: ObservableField<String> = ObservableField()
     var password: ObservableField<String> = ObservableField()
     var confirmPw: ObservableField<String> = ObservableField()
@@ -27,9 +26,9 @@ class RegisterViewModel(context: Context) : BaseViewModel(context) {
                         val user = User(userName.get(), password.get())
                         realm.copyToRealm(user)
                     }, {
-                        Toast.makeText(context, "注册成功", Toast.LENGTH_SHORT).show()
-                        finish()
-                     },
+                Toast.makeText(context, "注册成功", Toast.LENGTH_SHORT).show()
+                finish()
+            },
                     { t ->
                         Toast.makeText(context, "用户已经存在", Toast.LENGTH_SHORT).show()
                     })

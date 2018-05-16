@@ -7,9 +7,9 @@ import com.syc.framework.router.Router
 import com.syc.framework.utils.LogUtil
 
 /**
- * Created by Administrator on 2018\5\14 0014.
+ * Created by shiyucheng on 2018\5\14 0014.
  */
-object AcountModule {
+object AccountModule {
     fun install() {
         Router.getInstance().register("/account/SwipeBackTestActivityOpen", { pipe ->
             val intent = Intent(pipe.context, SwipeBackTestActivity::class.java)

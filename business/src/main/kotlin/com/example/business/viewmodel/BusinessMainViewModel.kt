@@ -1,6 +1,5 @@
 package com.example.business.viewmodel
 
-import android.content.Context
 import android.os.Bundle
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.router.Router
@@ -8,7 +7,7 @@ import com.syc.framework.router.Router
 /**
  * Created by shiyucheng on 2018\5\15 0015.
  */
-class BusinessMainViewModel(context: Context) : BaseViewModel(context) {
+class BusinessMainViewModel : BaseViewModel() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
