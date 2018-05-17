@@ -19,7 +19,18 @@ android {
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
+
     buildTypes {
+        dev {
+
+        }
+
+        debug{
+
+        }
+        pre{
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

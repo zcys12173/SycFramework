@@ -18,11 +18,5 @@ public class FrameworkApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        HttpConfig config = new HttpConfig();
-        config.baseUrl = "http://www.oschina.net/";
-        config.debug = true;
-        HttpManager.getInstance().init(getApplicationContext(),config);
-        DBManager.init(this);
-        ImageLoader.init(this);
     }
 }

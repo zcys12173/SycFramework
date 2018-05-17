@@ -56,6 +56,15 @@ ext {
             "imagepipeline_okhttp3": "com.facebook.fresco:imagepipeline-okhttp3:0.14.1"
 
     ]
+
+    urls = [
+            url_dev =  "\"http://www.dev.com\"",
+            url_test = "\"http://www.test.com\"",
+            url_pre = "\"http://www.pre.com\"",
+            url_onlne = "\"http://www.online.com\"",
+
+    ]
+
 }
 
 allprojects {

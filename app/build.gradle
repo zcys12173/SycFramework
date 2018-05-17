@@ -21,11 +21,43 @@ android {
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
     }
+//    flavorDimensions 'tier'
+//    productFlavors{
+//        dev{
+//            dimension 'tier'
+//        }
+////
+//        pre{
+//            dimension 'tier'
+//        }
+//
+//        online{
+//            dimension 'tier'
+//        }
+//    }
     buildTypes {
+
+        dev {
+            minifyEnabled false
+            buildConfigField('String', 'URL', rootProject.ext.url_dev)
+        }
+
+        debug {
+            minifyEnabled false
+            buildConfigField('String', 'URL', rootProject.ext.url_test)
+        }
+
+        pre {
+
+        }
+
         release {
+            buildConfigField 'String', 'URI', 'http://www.releasehost.com/'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+
     }
     repositories {
         flatDir {

@@ -16,7 +16,18 @@ android {
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
+
     buildTypes {
+        dev {
+
+        }
+
+        debug{
+
+        }
+        pre{
+
+        }
         release {
             postprocessing {
                 removeUnusedCode false
