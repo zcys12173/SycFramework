@@ -3,7 +3,7 @@ package com.syc.framework.sycframework.viewmodel
 import android.databinding.ObservableField
 import android.text.TextUtils
 import android.widget.Toast
-import com.syc.framework.database.DBManager
+import com.syc.common.database.DBManager
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.sycframework.model.User
 

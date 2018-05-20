@@ -1,13 +1,13 @@
 package com.syc.framework.sycframework.viewmodel
 
 import android.databinding.ObservableField
-import com.syc.framework.database.DBManager
+import com.syc.common.database.DBManager
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.sycframework.SP_KEY_PASSWORD
 import com.syc.framework.sycframework.SP_KEY_USERNAME
 import com.syc.framework.sycframework.model.Account
-import com.syc.framework.utils.MD5Util
-import com.syc.framework.utils.SharedPreferencesUtil
+import com.syc.common.utils.MD5Util
+import com.syc.common.utils.SharedPreferencesUtil
 import io.realm.Realm
 
 /**

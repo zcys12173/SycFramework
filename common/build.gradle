@@ -1,0 +1,74 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+
+
+    buildTypes {
+        dev {
+            minifyEnabled false
+        }
+
+        debug{
+            minifyEnabled false
+        }
+        pre{
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    kapt {
+        generateStubs = true
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["junit"]
+    api rootProject.ext.dependencies["test_runner"]
+    api rootProject.ext.dependencies["espresso"]
+    api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["converter_gson"]
+    api rootProject.ext.dependencies["adapter_rxjava"]
+    api rootProject.ext.dependencies["logging_interceptor"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["constraint"]
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["kotlin_stdlib"]
+    api rootProject.ext.dependencies["fresco"]
+    api rootProject.ext.dependencies["fresco_animated_gif"]
+    api rootProject.ext.dependencies["imagepipeline_okhttp3"]
+    api rootProject.ext.dependencies["smart_refresh_layout"]
+    api rootProject.ext.dependencies["smart_refresh_header"]
+    kapt "com.android.databinding:compiler:3.0.1"
+    //    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    api project(':framework')
+}
+

@@ -5,12 +5,12 @@ import android.databinding.ObservableField
 import android.os.Bundle
 import android.widget.Toast
 import com.syc.acount.view.AccountsActivity
-import com.syc.framework.database.DBManager
+import com.syc.common.database.DBManager
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.router.Router
 import com.syc.framework.router.annotation.RouterSubscribe
 import com.syc.framework.sycframework.model.User
-import com.syc.framework.utils.LogUtil
+import com.syc.common.utils.LogUtil
 
 
 /**

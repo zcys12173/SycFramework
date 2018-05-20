@@ -6,7 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="测试侧滑返回"/>
-    <com.syc.framework.imageloader.DraweeView
+    <com.syc.common.imageloader.DraweeView
         android:background="#434"
         android:id="@+id/image"
         android:scaleType="fitXY"

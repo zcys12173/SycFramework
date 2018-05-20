@@ -36,7 +36,19 @@
 
         <activity android:name="com.syc.acount.view.SwipeBackTestActivity" />
 
-        <activity android:name="com.example.business.view.BusinessMainActivity"/>
+        <activity android:name="com.example.business.view.BusinessMainActivity">
+            <intent-filter>
+                <action android:name="com.syc.business.open" />
+
+                <category android:name="com.syc.category.business" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="www.syc.com"
+                    android:port="8080"
+                    android:path="/android/sycFramework"
+                    android:scheme="http"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

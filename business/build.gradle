@@ -19,14 +19,14 @@ android {
 
     buildTypes {
         dev {
-
+            minifyEnabled false
         }
 
         debug{
-
+            minifyEnabled false
         }
         pre{
-
+            minifyEnabled false
         }
         release {
             postprocessing {
@@ -56,7 +56,7 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api project(':framework')
+    api project(':common')
     kapt "com.android.databinding:compiler:3.0.1"
 }
 repositories {

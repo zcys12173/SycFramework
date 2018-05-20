@@ -9,6 +9,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
 android {
+    signingConfigs {
+        syc {
+            keyAlias 'syc'
+            keyPassword 'shiyucheng1'
+            storePassword 'shiyucheng1'
+            storeFile file('/Users/liguiting/Documents/github/SycFramework/syc.keystore')
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId rootProject.ext.applicationId
@@ -35,9 +43,32 @@ android {
 //            dimension 'tier'
 //        }
 //    }
+    signingConfigs{
+        dev {
+            File strFile = new File("../syc.keystore")
+            storeFile file(strFile)
+            storePassword "shiyucheng1"
+            keyAlias "syc"
+            keyPassword "shiyucheng1"
+
+        }
+
+        debug {
+
+        }
+
+        pre {
+
+        }
+
+        release {
+
+        }
+    }
     buildTypes {
 
         dev {
+            signingConfig signingConfigs.dev
             minifyEnabled false
             buildConfigField('String', 'URL', rootProject.ext.url_dev)
         }
@@ -48,13 +79,15 @@ android {
         }
 
         pre {
-
+            minifyEnabled false
+            buildConfigField('String', 'URL', rootProject.ext.url_pre)
         }
 
         release {
             buildConfigField 'String', 'URI', 'http://www.releasehost.com/'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField('String', 'URL', rootProject.ext.url_online)
         }
 
 
@@ -64,11 +97,9 @@ android {
             dirs 'libs' //this way we can find the .aar file in libs folder
         }
     }
-
     dataBinding {
         enabled true
     }
-
     kapt {
         generateStubs = true
     }
@@ -79,5 +110,9 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':acount')
     kapt "com.android.databinding:compiler:3.0.1"
+    debugApi rootProject.ext.dependencies["leakcanary"]
+    testApi rootProject.ext.dependencies["leakcanary_no_op"]
+    releaseApi rootProject.ext.dependencies["leakcanary_no_op"]
+    devApi rootProject.ext.dependencies["leakcanary_no_op"]
     implementation project(':business')
 }

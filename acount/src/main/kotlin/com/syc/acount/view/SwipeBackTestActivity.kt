@@ -2,8 +2,8 @@ package com.syc.acount.view
 
 import android.os.Bundle
 import com.syc.acount.R
-import com.syc.framework.imageloader.DraweeView
-import com.syc.framework.imageloader.ImageLoader
+import com.syc.common.imageloader.DraweeView
+import com.syc.common.imageloader.ImageLoader
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity
 
 /**

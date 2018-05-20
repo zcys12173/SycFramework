@@ -53,15 +53,19 @@ ext {
             "fresco_animated_gif"  : "com.facebook.fresco:animated-gif:0.14.1",
             "fresco_webpsupport"   : "com.facebook.fresco:webpsupport:0.14.",
             "fresco_animated_webp" : "com.facebook.fresco:animated-webp:0.14.1",
-            "imagepipeline_okhttp3": "com.facebook.fresco:imagepipeline-okhttp3:0.14.1"
+            "imagepipeline_okhttp3": "com.facebook.fresco:imagepipeline-okhttp3:0.14.1",
+            "smart_refresh_layout" : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5",
+            "smart_refresh_header" : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-5",
+            "leakcanary"           : "com.squareup.leakcanary:leakcanary-android:1.5",
+            "leakcanary_no_op"     : "com.squareup.leakcanary:leakcanary-android-no-op:1.5",
 
     ]
 
     urls = [
-            url_dev =  "\"http://www.dev.com\"",
+            url_dev = "\"http://www.dev.com\"",
             url_test = "\"http://www.test.com\"",
             url_pre = "\"http://www.pre.com\"",
-            url_onlne = "\"http://www.online.com\"",
+            url_online = "\"http://www.online.com\"",
 
     ]
 

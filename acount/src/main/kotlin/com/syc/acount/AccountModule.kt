@@ -3,8 +3,8 @@ package com.syc.acount
 import android.content.Intent
 import android.os.Bundle
 import com.syc.acount.view.SwipeBackTestActivity
+import com.syc.common.utils.LogUtil
 import com.syc.framework.router.Router
-import com.syc.framework.utils.LogUtil
 
 /**
  * Created by shiyucheng on 2018\5\14 0014.
