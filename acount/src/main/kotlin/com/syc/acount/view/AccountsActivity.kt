@@ -22,7 +22,7 @@ class AccountsActivity : BaseActivity<ActivityAccountsBinding>() {
         val manager: RecyclerView.LayoutManager = LinearLayoutManager(this)
         val account = Account("aaa", "bbb", "ccc")
         accounts.add(account)
-        binding.rvAccounts.layoutManager = manager
-        binding.rvAccounts.adapter = AccountsAdapter(baseContext, accounts)
+        binding.prtAccounts.setLayoutManager(manager)
+        binding.prtAccounts.setAdapter( AccountsAdapter(baseContext, accounts))
     }
 }

@@ -1,0 +1,61 @@
+package com.syc.common.widget.refresh;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
+
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+/**
+ * Created by shiyucheng on 2018/5/20.
+ */
+
+public class PullToRefreshRecycleView extends SmartRefreshLayout {
+    private RecyclerView recyclerView;
+
+    public PullToRefreshRecycleView(Context context) {
+        super(context);
+        init();
+    }
+
+    public PullToRefreshRecycleView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    private void init() {
+        setRefreshHeader(new ClassicsHeader(getContext()));
+        setRefreshFooter(new ClassicsFooter(getContext()));
+        setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+            }
+        });
+
+        setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+            }
+        });
+        recyclerView = new RecyclerView(getContext());
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        addView(recyclerView, params);
+    }
+
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager){
+        recyclerView.setLayoutManager(layoutManager);
+    }
+}

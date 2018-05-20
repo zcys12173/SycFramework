@@ -21,21 +21,22 @@ class LoginViewModel : BaseViewModel() {
     var password: ObservableField<String> = ObservableField()
 
     init {
-//        userName.set("")
-//        password.set("")
+        userName.set("")
+        password.set("")
     }
 
     fun onLoginClick() {
-        DBManager.getDefaultInstance().executeTransactionAsync({ realm ->
-            realm.where(User::class.java).equalTo("userName", userName.get()).equalTo("password", password.get()).findFirst()
-                    ?: throw NoSuchFieldException("账号密码错误")
-
-        }, {
-            Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show()
-            goMainActivity()
-        }, {
-            Toast.makeText(context, "账号密码不对", Toast.LENGTH_SHORT).show()
-        })
+        goMainActivity()
+//        DBManager.getDefaultInstance().executeTransactionAsync({ realm ->
+//            realm.where(User::class.java).equalTo("userName", userName.get()).equalTo("password", password.get()).findFirst()
+//                    ?: throw NoSuchFieldException("账号密码错误")
+//
+//        }, {
+//            Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show()
+//            goMainActivity()
+//        }, {
+//            Toast.makeText(context, "账号密码不对", Toast.LENGTH_SHORT).show()
+//        })
     }
 
     fun onAddClick() {
