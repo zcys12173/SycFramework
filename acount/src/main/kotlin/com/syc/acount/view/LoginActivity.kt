@@ -2,14 +2,14 @@ package com.syc.acount.view
 
 import android.os.Bundle
 import com.syc.acount.R
-import com.syc.acount.databinding.ActivityMainBinding
+import com.syc.acount.databinding.ActivityLoginBinding
 import com.syc.framework.framework.BaseActivity
 import com.syc.framework.framework.ViewModelFactory
 import com.syc.framework.sycframework.viewmodel.LoginViewModel
 
-class LoginActivity : BaseActivity<ActivityMainBinding>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun getContent(): Int {
-        return R.layout.activity_main;
+        return R.layout.activity_login;
     }
 
     override fun initView(bundle: Bundle?) {

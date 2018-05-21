@@ -31,6 +31,7 @@ public class PullToRefreshRecycleView extends SmartRefreshLayout {
     }
 
     private void init() {
+
         setRefreshHeader(new ClassicsHeader(getContext()));
         setRefreshFooter(new ClassicsFooter(getContext()));
         setOnRefreshListener(new OnRefreshListener() {
@@ -47,8 +48,7 @@ public class PullToRefreshRecycleView extends SmartRefreshLayout {
             }
         });
         recyclerView = new RecyclerView(getContext());
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        addView(recyclerView, params);
+        setRefreshContent(recyclerView);
     }
 
     public void setAdapter(RecyclerView.Adapter adapter) {
