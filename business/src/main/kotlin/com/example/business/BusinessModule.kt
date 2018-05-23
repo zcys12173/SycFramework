@@ -3,6 +3,7 @@ package com.example.business
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import com.example.business.view.MainBusinessFragment
 import com.syc.common.utils.LogUtil
 import com.syc.common.utils.ToastUtils
 import com.syc.framework.router.Router
@@ -19,7 +20,7 @@ object BusinessModule {
             intent.data = uri
             val componentName = intent.resolveActivity(pipe.context.packageManager)
             if (componentName != null) {
-                LogUtil.d("收到参数", pipe.bundle.getString("age", "11"))
+                LogUtil.d("收到参数", pipe.params.getString("age", "11"))
                 pipe.context.startActivity(intent)
                 val bundle = Bundle();
                 bundle.putString("name", "返回数据")
@@ -28,5 +29,9 @@ object BusinessModule {
                 ToastUtils.showToast(pipe.context, "没有找到匹配的Activity")
             }
         })
+        Router.getInstance().register("/business/getMainBusinessFragment", { pipe ->
+            pipe.onSucceed(MainBusinessFragment())
+        })
+
     }
 }

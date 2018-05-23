@@ -10,8 +10,8 @@ import com.syc.framework.router.pipe.Pipe;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 路由
@@ -20,8 +20,14 @@ import java.util.Map;
 
 public class Router {
     private static Router instance;
+    private Map<String, Receiver> receivers;
+
+
+    private Map<String, RouterRule> routerMaps;
 
     private Router() {
+        receivers = new ConcurrentHashMap<String, Receiver>();
+        routerMaps = new ConcurrentHashMap<String, RouterRule>();
     }
 
     public static Router getInstance() {
@@ -66,10 +72,6 @@ public class Router {
         }
     }
 
-    private HashMap<String, Receiver> receivers = new HashMap<>();
-
-
-    private HashMap<String, RouterRule> routerMaps = new HashMap<String, RouterRule>();
 
     public void register(String uri, RouterRule routerRule) {
         routerMaps.put(uri, routerRule);
@@ -83,7 +85,7 @@ public class Router {
                 if (routerRule != null) {
                     Pipe pipe = new Pipe();
                     pipe.setCallBack(builder.getCallBack());
-                    pipe.setBundle(builder.getBundle());
+                    pipe.setParams(builder.getBundle());
                     pipe.setContext(builder.getContext());
                     routerRule.onRouter(pipe);
                     break;//如果注册多个执行第一个注册的

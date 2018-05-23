@@ -6,6 +6,8 @@ import android.os.Bundle;
 import com.syc.framework.router.listener.PipeCallBack;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by shiyucheng on 2018\5\14 0014.
@@ -13,12 +15,13 @@ import java.lang.ref.WeakReference;
 
 public class Pipe {
     private WeakReference<Context> wrContext;
-    private Bundle bundle;
+    private Object obj;
     private PipeCallBack callBack;
+    private Bundle bundle;
 
-    public void onSucceed(Bundle bundle) {
+    public void onSucceed(Object obj) {
         if (this.callBack != null) {
-            callBack.callBack(bundle);
+            callBack.callBack(obj);
         }
     }
 
@@ -44,11 +47,11 @@ public class Pipe {
         this.wrContext = new WeakReference<Context>(context);
     }
 
-    public Bundle getBundle() {
+    public Bundle getParams() {
         return bundle;
     }
 
-    public void setBundle(Bundle bundle) {
+    public void setParams(Bundle bundle) {
         this.bundle = bundle;
     }
 }

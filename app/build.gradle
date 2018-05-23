@@ -115,4 +115,5 @@ dependencies {
     releaseApi rootProject.ext.dependencies["leakcanary_no_op"]
     devApi rootProject.ext.dependencies["leakcanary_no_op"]
     implementation project(':business')
+    implementation project(':entry')
 }
