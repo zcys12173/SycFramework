@@ -18,12 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/layout_tab_mine"
+            <include layout="@layout/layout_homepage_mine"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp" />
 
-            <include layout="@layout/layout_tab_mine"
+            <include layout="@layout/layout_tab_recommend"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp" />
