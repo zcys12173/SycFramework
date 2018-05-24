@@ -69,14 +69,14 @@ public class BottomTabLayout extends LinearLayout implements View.OnClickListene
         if (index == currentIndex) {
             return;
         }
-        currentIndex = index;
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
             setAllChildViewEnable(childView, index == (int) childView.getTag());
         }
         if (onSelectedListener != null) {
-            onSelectedListener.onSelected(index);
+            onSelectedListener.onSelected(index,currentIndex);
         }
+        currentIndex = index;
     }
 
     private void setAllChildViewEnable(View view, boolean enable) {
@@ -114,7 +114,7 @@ public class BottomTabLayout extends LinearLayout implements View.OnClickListene
 
 
     public interface OnBottomSelectedListener {
-        void onSelected(int currentIndex);
+        void onSelected(int currentIndex,int lastIndex);
     }
 
     @BindingAdapter("selectedListener")

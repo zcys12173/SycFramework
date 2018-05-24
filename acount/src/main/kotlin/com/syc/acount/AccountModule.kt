@@ -2,6 +2,7 @@ package com.syc.acount
 
 import android.content.Intent
 import android.os.Bundle
+import com.syc.acount.view.MainFirstFragment
 import com.syc.acount.view.MainMineFragment
 import com.syc.acount.view.SwipeBackTestActivity
 import com.syc.common.utils.LogUtil
@@ -23,6 +24,10 @@ object AccountModule {
 
         Router.getInstance().register("/account/getMainMineFragment", { pipe ->
             pipe.onSucceed(MainMineFragment())
+        })
+
+        Router.getInstance().register("/account/getMainFirstFragment", { pipe ->
+            pipe.onSucceed(MainFirstFragment())
         })
     }
 }

@@ -78,22 +78,17 @@ public class Router {
     }
 
     public void router(Builder builder) {
-        for (Map.Entry<String, RouterRule> entry : routerMaps.entrySet()) {
-            String uri = entry.getKey();
-            if (TextUtils.equals(uri, builder.getUri())) {
-                RouterRule routerRule = entry.getValue();
-                if (routerRule != null) {
-                    Pipe pipe = new Pipe();
-                    pipe.setCallBack(builder.getCallBack());
-                    pipe.setParams(builder.getBundle());
-                    pipe.setContext(builder.getContext());
-                    routerRule.onRouter(pipe);
-                    break;//如果注册多个执行第一个注册的
-                }
-            }
-
-
+        RouterRule rule = routerMaps.get(builder.getUri());
+        if(rule != null){
+            Pipe pipe = new Pipe();
+            pipe.setCallBack(builder.getCallBack());
+            pipe.setParams(builder.getBundle());
+            pipe.setContext(builder.getContext());
+            rule.onRouter(pipe);
+        }else{
+            throw new NullPointerException("uri not found("+builder.getUri()+")");
         }
+
     }
 
     public static Builder newBuilder() {
