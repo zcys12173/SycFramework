@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class Pipe {
     private WeakReference<Context> wrContext;
-    private Object obj;
     private PipeCallBack callBack;
     private Bundle bundle;
 
