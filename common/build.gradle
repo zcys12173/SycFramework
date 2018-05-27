@@ -25,10 +25,10 @@ android {
             minifyEnabled false
         }
 
-        debug{
+        debug {
             minifyEnabled false
         }
-        pre{
+        pre {
             minifyEnabled false
         }
         release {
@@ -44,6 +44,7 @@ android {
     kapt {
         generateStubs = true
     }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/attrs'] } }
 }
 
 dependencies {

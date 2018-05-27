@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CommonTitleBar">
+        <attr name="leftLayout" format="reference" />
+        <attr name="centerLayout" format="reference" />
+        <attr name="rightLayout" format="reference" />
+        <attr name="titleText" format="string" />
+    </declare-styleable>
+</resources>

@@ -8,7 +8,14 @@
             name="vm"
             type="com.syc.framework.sycframework.viewmodel.LoginViewModel" />
     </data>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <com.syc.common.widget.CommonTitleBar
+            android:layout_width="match_parent"
+            app:titleText="登录"
+            android:layout_height="wrap_content"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -64,4 +71,5 @@
 
 
     </RelativeLayout>
+    </LinearLayout>
 </layout>

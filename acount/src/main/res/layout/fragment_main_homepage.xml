@@ -9,7 +9,7 @@
 
         <com.syc.common.widget.CommonTitleBar
             android:layout_width="match_parent"
-            app:titleText="我的"
+            app:titleText="首页"
             android:layout_height="wrap_content" />
 
         <RelativeLayout
@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="mine" />
+                android:text="homePage" />
         </RelativeLayout>
     </LinearLayout>
 

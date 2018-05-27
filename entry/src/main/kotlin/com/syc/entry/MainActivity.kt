@@ -81,7 +81,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }else{
             nextFragment = fragments[index]
             translation.add(binding.content.id,nextFragment,nextTag)
-            translation.show(nextFragment)
         }
         translation.commit()
     }
