@@ -3,14 +3,11 @@ package com.syc.framework.sycframework.viewmodel
 import android.content.Intent
 import android.databinding.ObservableField
 import android.os.Bundle
-import android.widget.Toast
 import com.syc.acount.view.AccountsActivity
-import com.syc.common.database.DBManager
+import com.syc.common.utils.LogUtil
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.router.Router
 import com.syc.framework.router.annotation.RouterSubscribe
-import com.syc.framework.sycframework.model.User
-import com.syc.common.utils.LogUtil
 
 
 /**
@@ -48,6 +45,9 @@ class LoginViewModel : BaseViewModel() {
             LogUtil.d("上一个页面返回数据", bundle.getString("name"))
         }).params(bundle).buildAndRouter()
 
+    }
+    fun onBackClick(){
+       finish()
     }
 
 

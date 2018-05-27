@@ -28,6 +28,7 @@ public class CommonTitleBar extends LinearLayout {
     private ImageView defaultBackLayout;
     private TextView defaultCenterLayout;
     private String titleText;
+    private boolean leftLayoutVisible;
     private static final int defaultCenterTextColor = 0xff333333;
     private static final int defaultCenterTextSize = 18;
 
@@ -48,6 +49,7 @@ public class CommonTitleBar extends LinearLayout {
             int leftLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_leftLayout, 0);
             int rightLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_rightLayout, 0);
             int centerLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_centerLayout, 0);
+            leftLayoutVisible = a.getBoolean(R.styleable.CommonTitleBar_leftVisible,true);
             titleText = a.getString(R.styleable.CommonTitleBar_titleText);
             if (leftLayoutRes != 0) {
                 leftLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), leftLayoutRes, null, false);
@@ -115,7 +117,9 @@ public class CommonTitleBar extends LinearLayout {
         if (leftLayoutBinding != null) {
             titleLayout.addView(leftLayoutBinding.getRoot(), leftLayoutParams);
         } else {
-            titleLayout.addView(defaultBackLayout);
+            if (leftLayoutVisible) {
+                titleLayout.addView(defaultBackLayout);
+            }
         }
 
         RelativeLayout.LayoutParams centerLayoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -135,4 +139,15 @@ public class CommonTitleBar extends LinearLayout {
         LayoutParams titleLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         addView(titleLayout,titleLayoutParams);
     }
+    private OnClickListener onBackClickListener;
+    public void setOnBackClickListener( OnClickListener onBackClickListener){
+        if(defaultBackLayout != null){
+            defaultBackLayout.setOnClickListener(onBackClickListener);
+        }
+    }
+    @BindingAdapter("backClick")
+    public static void backClick(CommonTitleBar titleBar,OnClickListener onBackClickListener){
+        titleBar.setOnBackClickListener(onBackClickListener);
+    }
+
 }

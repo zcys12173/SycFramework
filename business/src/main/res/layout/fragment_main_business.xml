@@ -8,6 +8,7 @@
         <com.syc.common.widget.CommonTitleBar
             android:layout_width="match_parent"
             app:titleText="推荐"
+            app:leftVisible = "false"
             android:layout_height="wrap_content"/>
     <RelativeLayout
         android:layout_width="match_parent"

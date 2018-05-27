@@ -5,5 +5,6 @@
         <attr name="centerLayout" format="reference" />
         <attr name="rightLayout" format="reference" />
         <attr name="titleText" format="string" />
+        <attr name="leftVisible" format="boolean" />
     </declare-styleable>
 </resources>
