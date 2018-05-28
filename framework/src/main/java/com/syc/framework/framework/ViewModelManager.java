@@ -92,7 +92,6 @@ public class ViewModelManager{
             if (item != null) {
                 item.onActivityResult(requestCode, resultCode, data);
             }
-
         }
     }
 

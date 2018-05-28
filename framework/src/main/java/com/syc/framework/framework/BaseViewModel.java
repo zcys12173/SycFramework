@@ -7,23 +7,24 @@ import android.databinding.BaseObservable;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.syc.framework.ActivityLauncher;
 import com.syc.framework.router.Router;
 
 import java.lang.ref.WeakReference;
 
 /**
- *
  * Created by shiyucheng on 2018/1/9.
  */
 
 public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle {
     private WeakReference<Context> wrContext;
+    private ActivityLauncher activityLauncher;
 
     public BaseViewModel() {
 
     }
 
-    public void setContext(Context context){
+    public void setContext(Context context) {
         this.wrContext = new WeakReference<Context>(context);
     }
 
@@ -83,21 +84,45 @@ public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle 
         }
     }
 
-    protected void Toast(String message){
+    protected void Toast(String message) {
         if (wrContext.get() != null) {
             Toast.makeText(wrContext.get(), message, Toast.LENGTH_SHORT).show();
         }
     }
 
-    protected void startActivity(Intent intent){
-        if (wrContext.get() != null) {
-            wrContext.get().startActivity(intent);
+    protected void startActivity(Intent intent) {
+        if (activityLauncher != null) {
+            activityLauncher.startActivity(intent);
         }
     }
 
-    protected void startActivityForResult(Intent intent,int requestCode){
-        if (wrContext.get() != null) {
-            ((Activity) wrContext.get()).startActivityForResult(intent,requestCode);
+    protected void startActivityForResult(Intent intent, int requestCode) {
+        if (activityLauncher != null) {
+            activityLauncher.startActivityForResult(intent, requestCode);
         }
+    }
+
+    protected void setResult(int resultCode, Intent intent) {
+        if (activityLauncher != null) {
+            activityLauncher.setResult(resultCode, intent);
+        }
+    }
+
+    protected void setResult(int resultCode) {
+        if (activityLauncher != null) {
+            activityLauncher.setResult(resultCode);
+        }
+    }
+
+
+    protected Intent getIntent() {
+        if (wrContext.get() != null) {
+            return ((Activity) wrContext.get()).getIntent();
+        }
+        return null;
+    }
+
+    void setActivityLauncher(ActivityLauncher activityLauncher) {
+        this.activityLauncher = activityLauncher;
     }
 }

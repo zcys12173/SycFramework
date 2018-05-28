@@ -1,6 +1,7 @@
 package com.syc.framework.framework;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -10,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.syc.framework.ActivityLauncher;
+
 /**
- *
  * Created by shiyucheng on 2018\5\21 0021.
  */
 
-public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment implements ActivityLauncher {
     private ViewModelManager viewModelManager;
 
     public T getBinding() {
@@ -34,6 +36,11 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
         viewModelManager = new ViewModelManager();
     }
 
+
+    public void addViewModel(BaseViewModel viewModel){
+        viewModel.setActivityLauncher(this);
+        viewModelManager.addViewModel(viewModel);
+    }
 
     @Nullable
     @Override
@@ -90,8 +97,33 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        viewModelManager.onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void setResult(int resultCode) {
+        getActivity().setResult(resultCode);
+    }
+
+    @Override
+    public void setResult(int resultCode, Intent intent) {
+        getActivity().setResult(resultCode,intent);
+    }
 }

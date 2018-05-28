@@ -20,7 +20,9 @@ class MainMineFragment:BaseFragment<FragmentMainMineBinding>(){
 
     override fun init(savedInstanceState: Bundle?) {
         val vm = ViewModelFactory.create(context,MainMineViewModel::class.java)
+        addViewModel(vm)
         binding.vm = vm
+
     }
 
 }

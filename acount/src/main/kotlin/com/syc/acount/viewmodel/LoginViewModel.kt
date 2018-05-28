@@ -1,5 +1,6 @@
 package com.syc.framework.sycframework.viewmodel
 
+import android.app.Activity
 import android.content.Intent
 import android.databinding.ObservableField
 import android.os.Bundle
@@ -24,6 +25,12 @@ class LoginViewModel : BaseViewModel() {
         password.set("")
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val params = intent.getStringExtra("params1")
+        Toast("收到参数：" + params);
+    }
+
     fun onLoginClick() {
         DBManager.getDefaultInstance().executeTransactionAsync({ realm ->
             realm.where(User::class.java).equalTo("userName", userName.get()).equalTo("password", password.get()).findFirst()
@@ -46,8 +53,12 @@ class LoginViewModel : BaseViewModel() {
         }).params(bundle).buildAndRouter()
 
     }
-    fun onBackClick(){
-       finish()
+
+    fun onBackClick() {
+        val intent = Intent();
+        intent.putExtra("data", "返回参数")
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
 

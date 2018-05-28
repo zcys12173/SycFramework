@@ -68,6 +68,7 @@ android {
     buildTypes {
 
         dev {
+            debuggable true
             signingConfig signingConfigs.dev
             minifyEnabled false
             buildConfigField('String', 'URL', rootProject.ext.url_dev)

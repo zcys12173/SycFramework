@@ -11,13 +11,15 @@ import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.syc.framework.ActivityLauncher;
+
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by shiyucheng on 2018/1/9.
  */
 
-public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackActivity {
+public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackActivity implements ActivityLauncher{
     private ViewModelManager viewModelManager;
     private T binding;
 
@@ -33,6 +35,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
         viewModelManager = new ViewModelManager();
         initView(savedInstanceState);
         viewModelManager.onCreate(savedInstanceState);
+
     }
 
     /**
@@ -59,6 +62,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
 
 
     public void addViewModel(BaseViewModel viewModel) {
+        viewModel.setActivityLauncher(this);
         viewModelManager.addViewModel(viewModel);
     }
 
@@ -113,6 +117,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        viewModelManager.onActivityResult(requestCode,resultCode,data);
     }
 }
