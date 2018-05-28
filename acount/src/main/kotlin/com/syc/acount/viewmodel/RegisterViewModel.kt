@@ -29,7 +29,7 @@ class RegisterViewModel : BaseViewModel() {
                 Toast.makeText(context, "注册成功", Toast.LENGTH_SHORT).show()
                 finish()
             },
-                    { t ->
+                    {
                         Toast.makeText(context, "用户已经存在", Toast.LENGTH_SHORT).show()
                     })
         }

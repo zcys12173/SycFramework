@@ -19,10 +19,7 @@ class MainFirstFragment:BaseFragment<FragmentMainHomepageBinding>(){
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        binding.tvName.setOnClickListener({
-            val intent = Intent(context,LoginActivity::class.java)
-            startActivity(intent)
-        })
+
     }
 
 }

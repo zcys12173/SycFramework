@@ -8,69 +8,72 @@
             name="vm"
             type="com.syc.framework.sycframework.viewmodel.LoginViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <com.syc.common.widget.CommonTitleBar
             android:layout_width="match_parent"
-            app:titleText="登录"
+            android:layout_height="wrap_content"
             app:backClick="@{()->vm.onBackClick()}"
-            android:layout_height="wrap_content"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            app:titleText="登录" />
 
-        <EditText
-            android:id="@+id/edt_username"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/edt_password"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:hint="@string/user_name"
-            android:maxLength="16"
-            android:singleLine="true"
-            android:text="@={vm.userName}" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/edt_password"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_login"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword"
-            android:maxLength="16"
-            android:singleLine="true"
-            android:text="@={vm.password}" />
+            <EditText
+                android:id="@+id/edt_username"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/edt_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:hint="@string/user_name"
+                android:maxLength="16"
+                android:singleLine="true"
+                android:text="@={vm.userName}" />
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:onClick="@{() -> vm.onLoginClick()}"
-            android:text="@string/login" />
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btn_login"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:singleLine="true"
+                android:text="@={vm.password}" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="21dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            android:clickable="true"
-            android:onClick="@{()->vm.onAddClick()}"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:onClick="@{() -> vm.onLoginClick()}"
+                android:text="@string/login" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingActionButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="21dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:clickable="true"
+                android:onClick="@{()->vm.onAddClick()}"
+                app:srcCompat="@android:drawable/ic_input_add" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
     </LinearLayout>
 </layout>

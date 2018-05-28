@@ -2,6 +2,7 @@ package com.syc.framework.framework;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -71,6 +72,11 @@ public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle 
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
     protected void finish() {
         if (wrContext.get() != null) {
             ((Activity) wrContext.get()).finish();
@@ -80,6 +86,18 @@ public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle 
     protected void Toast(String message){
         if (wrContext.get() != null) {
             Toast.makeText(wrContext.get(), message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected void startActivity(Intent intent){
+        if (wrContext.get() != null) {
+            wrContext.get().startActivity(intent);
+        }
+    }
+
+    protected void startActivityForResult(Intent intent,int requestCode){
+        if (wrContext.get() != null) {
+            ((Activity) wrContext.get()).startActivityForResult(intent,requestCode);
         }
     }
 }

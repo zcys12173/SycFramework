@@ -1,5 +1,6 @@
 package com.syc.framework.framework;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 /**
@@ -22,4 +23,6 @@ public interface ViewModelLifeCycle {
     void onReStart();
 
     void onSaveInstanceState(Bundle outState);
+
+    void onActivityResult(int requestCode, int resultCode, Intent data);
 }

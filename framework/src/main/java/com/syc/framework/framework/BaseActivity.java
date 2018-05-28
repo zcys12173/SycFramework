@@ -1,5 +1,6 @@
 package com.syc.framework.framework;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.Color;
@@ -107,5 +108,11 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
         super.onDestroy();
         viewModelManager.onDestroy();
         viewModelManager.release();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }
