@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.syc.framework.ActivityLauncher;
 import com.syc.framework.router.annotation.RouterSubscribe;
 import com.syc.framework.router.listener.PipeCallBack;
 import com.syc.framework.router.pipe.Pipe;
@@ -83,7 +84,7 @@ public class Router {
             Pipe pipe = new Pipe();
             pipe.setCallBack(builder.getCallBack());
             pipe.setParams(builder.getBundle());
-            pipe.setContext(builder.getContext());
+            pipe.setActivityLauncher(builder.getActivityLauncher());
             rule.onRouter(pipe);
         }else{
             throw new NullPointerException("uri not found("+builder.getUri()+")");
@@ -96,14 +97,14 @@ public class Router {
     }
 
     public static class Builder {
-        private WeakReference<Context> context;
+        private WeakReference<ActivityLauncher> wrActivityLauncher;
         private String uri;
         private Router router;
         private PipeCallBack callBack;
         private Bundle bundle;
 
-        public Builder from(Context context) {
-            this.context = new WeakReference<Context>(context);
+        public Builder from(ActivityLauncher activityLauncher) {
+            this.wrActivityLauncher = new WeakReference<ActivityLauncher>(activityLauncher);
             return this;
         }
 
@@ -123,8 +124,8 @@ public class Router {
             return this;
         }
 
-        public Context getContext() {
-            return context.get();
+        public ActivityLauncher getActivityLauncher() {
+            return wrActivityLauncher.get();
         }
 
         public String getUri() {

@@ -14,9 +14,9 @@ import com.syc.framework.router.Router
 object AccountModule {
     fun install() {
         Router.getInstance().register("/account/SwipeBackTestActivityOpen", { pipe ->
-            val intent = Intent(pipe.context, SwipeBackTestActivity::class.java)
+            val intent = Intent(pipe.activityLauncher.context, SwipeBackTestActivity::class.java)
             LogUtil.d("收到参数", pipe.params.getString("age", "11"))
-            pipe.context.startActivity(intent)
+            pipe.activityLauncher.startActivity(intent)
             val bundle = Bundle()
             bundle.putString("name", "返回数据")
             pipe.onSucceed(bundle)

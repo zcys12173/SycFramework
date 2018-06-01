@@ -47,7 +47,7 @@ class LoginViewModel : BaseViewModel() {
     fun onAddClick() {
         val bundle = Bundle()
         bundle.putString("age", "18")
-        Router.newBuilder().uri("/business/BusinessMainActivityOpen").from(context).callBack({ obj ->
+        Router.newBuilder().uri("/business/BusinessMainActivityOpen").from(activityLauncher).callBack({ obj ->
             val bundle = obj as Bundle
             LogUtil.d("上一个页面返回数据", bundle.getString("name"))
         }).params(bundle).buildAndRouter()

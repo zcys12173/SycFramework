@@ -1,5 +1,6 @@
 package com.syc.framework.framework;
 
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -118,5 +119,10 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         viewModelManager.onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

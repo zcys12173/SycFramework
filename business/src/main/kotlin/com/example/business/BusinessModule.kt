@@ -18,15 +18,15 @@ object BusinessModule {
             intent.addCategory("com.syc.category.business")
             val uri = Uri.parse("http://www.syc.com:8080/android/sycFramework")
             intent.data = uri
-            val componentName = intent.resolveActivity(pipe.context.packageManager)
+            val componentName = intent.resolveActivity(pipe.activityLauncher.context.packageManager)
             if (componentName != null) {
                 LogUtil.d("收到参数", pipe.params.getString("age", "11"))
-                pipe.context.startActivity(intent)
+                pipe.activityLauncher.startActivity(intent)
                 val bundle = Bundle();
                 bundle.putString("name", "返回数据")
                 pipe.onSucceed(bundle)
             } else {
-                ToastUtils.showToast(pipe.context, "没有找到匹配的Activity")
+                ToastUtils.showToast(pipe.activityLauncher.context, "没有找到匹配的Activity")
             }
         })
         Router.getInstance().register("/business/getMainBusinessFragment", { pipe ->

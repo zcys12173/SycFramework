@@ -1,5 +1,6 @@
 package com.syc.framework;
 
+import android.content.Context;
 import android.content.Intent;
 
 /**
@@ -14,4 +15,6 @@ public interface ActivityLauncher {
     void setResult(int resultCode);
 
     void setResult(int resultCode, Intent intent);
+
+    Context getContext();
 }

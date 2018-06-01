@@ -78,6 +78,10 @@ public class BaseViewModel extends BaseObservable implements ViewModelLifeCycle 
 
     }
 
+    protected ActivityLauncher getActivityLauncher(){
+        return activityLauncher;
+    }
+
     protected void finish() {
         if (wrContext.get() != null) {
             ((Activity) wrContext.get()).finish();

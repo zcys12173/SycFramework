@@ -1,20 +1,18 @@
 package com.syc.framework.router.pipe;
 
-import android.content.Context;
 import android.os.Bundle;
 
+import com.syc.framework.ActivityLauncher;
 import com.syc.framework.router.listener.PipeCallBack;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by shiyucheng on 2018\5\14 0014.
  */
 
 public class Pipe {
-    private WeakReference<Context> wrContext;
+    private WeakReference<ActivityLauncher> wrActivityLauncher;
     private PipeCallBack callBack;
     private Bundle bundle;
 
@@ -38,12 +36,12 @@ public class Pipe {
         this.callBack = callBack;
     }
 
-    public Context getContext() {
-        return wrContext.get();
+    public ActivityLauncher getActivityLauncher() {
+        return wrActivityLauncher.get();
     }
 
-    public void setContext(Context context) {
-        this.wrContext = new WeakReference<Context>(context);
+    public void setActivityLauncher(ActivityLauncher activityLauncher) {
+        this.wrActivityLauncher = new WeakReference<ActivityLauncher>(activityLauncher);
     }
 
     public Bundle getParams() {
