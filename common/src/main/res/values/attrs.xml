@@ -4,7 +4,11 @@
         <attr name="leftLayout" format="reference" />
         <attr name="centerLayout" format="reference" />
         <attr name="rightLayout" format="reference" />
-        <attr name="titleText" format="string" />
-        <attr name="leftVisible" format="boolean" />
+        <attr name="leftImageSrc" format="reference" />
+        <attr name="leftText" format="string" />
+        <attr name="rightImageSrc" format="reference" />
+        <attr name="rightText" format="string" />
+        <attr name="centerImageSrc" format="reference" />
+        <attr name="centerText" format="string" />
     </declare-styleable>
 </resources>

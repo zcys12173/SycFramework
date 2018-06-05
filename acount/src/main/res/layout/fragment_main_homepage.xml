@@ -9,8 +9,9 @@
 
         <com.syc.common.widget.CommonTitleBar
             android:layout_width="match_parent"
-            app:titleText="首页"
-            app:leftVisible = "false"
+            app:leftImageSrc="@drawable/title_bar_back_icon_selector"
+            app:centerText="首页"
+            app:rightLayout="@layout/layout_login_title_right"
             android:layout_height="wrap_content" />
 
         <RelativeLayout

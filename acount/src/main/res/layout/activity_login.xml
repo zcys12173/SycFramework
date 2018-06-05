@@ -14,11 +14,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.syc.common.widget.CommonTitleBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:backClick="@{()->vm.onBackClick()}"
-            app:titleText="登录" />
+        <!--<com.syc.common.widget.CommonTitleBar-->
+            <!--android:id="@+id/titleBar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:leftLayout="@layout/layout_login_title_left"-->
+            <!--app:rightLayout="@layout/layout_login_title_right"-->
+            <!--app:backClick="@{()->vm.onBackClick()}"-->
+            <!--app:titleText="@string/app_name" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"

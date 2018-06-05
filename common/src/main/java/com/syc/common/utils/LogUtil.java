@@ -10,7 +10,7 @@ import com.syc.framework.framework.BuildConfig;
  */
 
 public class LogUtil {
-    public static boolean DEBUG = BuildConfig.DEBUG;
+    public static boolean DEBUG = BuildConfig.DEBUG || !BuildConfig.BUILD_TYPE.equals("release") ;
 
     public static void d(String tag, String msg) {
         if (DEBUG) {

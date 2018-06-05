@@ -6,6 +6,7 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -16,23 +17,29 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.syc.common.R;
-import com.syc.common.utils.DensityUtils;
 
 /**
  * Created by shiyucheng on 2018\5\27 0027.
  */
 
 public class CommonTitleBar extends LinearLayout {
+    public static final int LAYOUT_TYPE_TEXT = 0;
+    public static final int LAYOUT_TYPE_IMAGE = 1;
+    public static final int LAYOUT_TYPE_CUSTOM = 2;
+    public static final int LAYOUT_TYPE_EMPTY = 3;
     private ViewDataBinding leftLayoutBinding;
     private ViewDataBinding rightLayoutBinding;
     private ViewDataBinding centerLayoutBinding;
-    private ImageView defaultBackLayout;
-    private TextView defaultCenterLayout;
-    private String titleText;
-    private boolean leftLayoutVisible;
+    private View leftLayout;
+    private View centerLayout;
+    private View rightLayout;
+    private int leftLayoutType;
+    private int rightLayoutType;
+    private int centerLayoutType;
     private static final int DEFAULT_CENTER_TEXT_COLOR = 0xff333333;
     private static final int DEFAULT_CENTER_TEXT_SIZE = 18;
-    private static final int HEIGHT_FOR_TITLE_BAR= 120;
+    private static final int HEIGHT_FOR_TITLE_BAR = 120;
+
     public CommonTitleBar(Context context) {
         super(context, null);
         init(context, null);
@@ -47,40 +54,79 @@ public class CommonTitleBar extends LinearLayout {
     private void getAttrs(Context context, AttributeSet attrs) {
         if (attrs != null && context != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CommonTitleBar);
+
+            //处理左侧布局
             int leftLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_leftLayout, 0);
-            int rightLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_rightLayout, 0);
-            int centerLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_centerLayout, 0);
-            leftLayoutVisible = a.getBoolean(R.styleable.CommonTitleBar_leftVisible, true);
-            titleText = a.getString(R.styleable.CommonTitleBar_titleText);
+            int leftImageRes = a.getResourceId(R.styleable.CommonTitleBar_leftImageSrc, 0);
+            String leftText = a.getString(R.styleable.CommonTitleBar_leftText);
             if (leftLayoutRes != 0) {
+                leftLayoutType = LAYOUT_TYPE_CUSTOM;
                 leftLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), leftLayoutRes, null, false);
-            } else if (leftLayoutVisible) {
-                initDefaultBackLayout();
-            }
-            if (centerLayoutRes != 0) {
-                centerLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), centerLayoutRes, null, false);
+                leftLayout = leftLayoutBinding.getRoot();
+            } else if (leftImageRes != 0) {
+                leftLayoutType = LAYOUT_TYPE_IMAGE;
+                leftLayout = initImageLayout(leftImageRes);
+            } else if (!TextUtils.isEmpty(leftText)) {
+                leftLayoutType = LAYOUT_TYPE_TEXT;
+                leftLayout = initTextLayout(leftText);
             } else {
-                initDefaultCenterLayout();
+                leftLayoutType = LAYOUT_TYPE_EMPTY;
             }
+
+            //处理中间布局
+            int centerLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_centerLayout, 0);
+            int centerImageRes = a.getResourceId(R.styleable.CommonTitleBar_centerImageSrc, 0);
+            String centerText = a.getString(R.styleable.CommonTitleBar_centerText);
+            if (centerLayoutRes != 0) {
+                centerLayoutType = LAYOUT_TYPE_CUSTOM;
+                centerLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), centerLayoutRes, null, false);
+                centerLayout = centerLayoutBinding.getRoot();
+            } else if (centerImageRes != 0) {
+                centerLayoutType = LAYOUT_TYPE_IMAGE;
+                centerLayout = initImageLayout(centerImageRes);
+            } else if (!TextUtils.isEmpty(centerText)) {
+                centerLayoutType = LAYOUT_TYPE_TEXT;
+                centerLayout = initTextLayout(centerText);
+            } else {
+                centerLayoutType = LAYOUT_TYPE_EMPTY;
+            }
+
+            //处理右侧布局
+            int rightLayoutRes = a.getResourceId(R.styleable.CommonTitleBar_rightLayout, 0);
+            int rightImageRes = a.getResourceId(R.styleable.CommonTitleBar_rightImageSrc, 0);
+            String rightText = a.getString(R.styleable.CommonTitleBar_rightText);
             if (rightLayoutRes != 0) {
+                rightLayoutType = LAYOUT_TYPE_CUSTOM;
                 rightLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), rightLayoutRes, null, false);
+                rightLayout = rightLayoutBinding.getRoot();
+            } else if (rightImageRes != 0) {
+                rightLayoutType = LAYOUT_TYPE_IMAGE;
+                rightLayout = initImageLayout(rightImageRes);
+            } else if (!TextUtils.isEmpty(rightText)) {
+                rightLayoutType = LAYOUT_TYPE_TEXT;
+                rightLayout = initTextLayout(rightText);
+            } else {
+                rightLayoutType = LAYOUT_TYPE_EMPTY;
             }
             a.recycle();
         }
     }
 
-    private void initDefaultBackLayout() {
-        defaultBackLayout = new ImageView(getContext());
-        defaultBackLayout.setScaleType(ImageView.ScaleType.CENTER);
-        defaultBackLayout.setImageResource(R.drawable.title_bar_back_icon_selector);
+    private View initImageLayout(int resourceId) {
+        ImageView iv = new ImageView(getContext());
+        iv.setScaleType(ImageView.ScaleType.CENTER);
+        iv.setImageResource(resourceId);
+        return iv;
     }
 
-    private void initDefaultCenterLayout() {
-        defaultCenterLayout = new TextView(getContext());
-        defaultCenterLayout.setText(titleText);
-        defaultCenterLayout.setTextSize(TypedValue.COMPLEX_UNIT_SP, DEFAULT_CENTER_TEXT_SIZE);
-        defaultCenterLayout.setTextColor(DEFAULT_CENTER_TEXT_COLOR);
+    private View initTextLayout(String text) {
+        TextView tv = new TextView(getContext());
+        tv.setText(text);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, DEFAULT_CENTER_TEXT_SIZE);
+        tv.setTextColor(DEFAULT_CENTER_TEXT_COLOR);
+        return tv;
     }
+
 
     /**
      * 利用反射获取状态栏高度
@@ -116,31 +162,26 @@ public class CommonTitleBar extends LinearLayout {
         RelativeLayout.LayoutParams leftLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         leftLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         leftLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        if (leftLayoutBinding != null) {
-            titleLayout.addView(leftLayoutBinding.getRoot(), leftLayoutParams);
-        } else {
-            if (leftLayoutVisible) {
-                RelativeLayout.LayoutParams defaultLayoutParams = new RelativeLayout.LayoutParams(80,80);
-                defaultLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-                defaultLayoutParams.leftMargin=10;
-                titleLayout.addView(defaultBackLayout,defaultLayoutParams);
-            }
+
+        if (leftLayoutType != LAYOUT_TYPE_EMPTY) {
+            RelativeLayout.LayoutParams defaultLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            defaultLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+            defaultLayoutParams.leftMargin = 10;
+            titleLayout.addView(leftLayout, defaultLayoutParams);
+        }
+        if (centerLayoutType != LAYOUT_TYPE_EMPTY) {
+            RelativeLayout.LayoutParams centerLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            centerLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+            titleLayout.addView(centerLayout, centerLayoutParams);
         }
 
-        RelativeLayout.LayoutParams centerLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        centerLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-        if (centerLayoutBinding != null) {
-            titleLayout.addView(centerLayoutBinding.getRoot(), centerLayoutParams);
-        } else {
-            titleLayout.addView(defaultCenterLayout, centerLayoutParams);
+        if (rightLayoutType != LAYOUT_TYPE_EMPTY) {
+            RelativeLayout.LayoutParams rightLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            rightLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            rightLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+            titleLayout.addView(rightLayout, rightLayoutParams);
         }
 
-        RelativeLayout.LayoutParams rightLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        rightLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        rightLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        if (rightLayoutBinding != null) {
-            titleLayout.addView(rightLayoutBinding.getRoot(), rightLayoutParams);
-        }
         LayoutParams titleLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, HEIGHT_FOR_TITLE_BAR);
         addView(titleLayout, titleLayoutParams);
     }
@@ -172,35 +213,23 @@ public class CommonTitleBar extends LinearLayout {
         init(null, null);
     }
 
-    public String getTitleText() {
-        return titleText;
+    public View getLeftLayout() {
+        return leftLayout;
     }
 
-    public void setTitleText(String titleText) {
-        this.titleText = titleText;
-        if (defaultCenterLayout != null) {
-            defaultCenterLayout.setText(titleText);
-        }
+    public View getCenterLayout() {
+
+        return centerLayout;
     }
 
-    public boolean isLeftLayoutVisible() {
-        return leftLayoutVisible;
+    public View getRightLayout() {
+
+        return rightLayout;
     }
 
-    public void setLeftLayoutVisible(boolean leftLayoutVisible) {
-        this.leftLayoutVisible = leftLayoutVisible;
-        int visible = leftLayoutVisible ? View.VISIBLE : View.GONE;
-        if (defaultBackLayout != null) {
-            defaultBackLayout.setVisibility(visible);
-        } else if (leftLayoutBinding != null) {
-            leftLayoutBinding.getRoot().setVisibility(visible);
-        }
-    }
 
     public void setOnBackClickListener(OnClickListener onBackClickListener) {
-        if (defaultBackLayout != null) {
-            defaultBackLayout.setOnClickListener(onBackClickListener);
-        }
+
     }
 
     @BindingAdapter("backClick")
