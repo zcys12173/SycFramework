@@ -4,13 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.databinding.ObservableField
 import android.os.Bundle
+import com.syc.acount.api.RequestService
 import com.syc.acount.view.AccountsActivity
 import com.syc.common.database.DBManager
+import com.syc.common.network.HttpManager
 import com.syc.common.utils.LogUtil
 import com.syc.framework.framework.BaseViewModel
 import com.syc.framework.router.Router
 import com.syc.framework.router.annotation.RouterSubscribe
 import com.syc.framework.sycframework.model.User
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 /**
@@ -71,5 +75,18 @@ class LoginViewModel : BaseViewModel() {
     @RouterSubscribe(uri = "login/annoTest")
     fun onAnnotationTest(bundle: Bundle) {
         Toast(bundle.getString("anno"))
+    }
+
+    private fun getData(){
+        HttpManager.getInstance().getService(RequestService::class.java).request("key")
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { t -> t!!.data }.subscribe({s->
+
+        },{
+
+        },{
+
+        })
     }
 }

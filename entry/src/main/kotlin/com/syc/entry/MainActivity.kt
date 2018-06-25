@@ -97,7 +97,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onRestoreInstanceState(savedInstanceState)
     }
 
-
-
-
 }

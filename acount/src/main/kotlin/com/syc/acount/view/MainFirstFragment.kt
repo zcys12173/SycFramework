@@ -2,9 +2,11 @@ package com.syc.acount.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import com.syc.acount.R
 import com.syc.acount.databinding.FragmentMainHomepageBinding
 import com.syc.acount.databinding.FragmentMainMineBinding
+import com.syc.common.utils.LogUtil
 import com.syc.framework.framework.BaseFragment
 
 /**
@@ -19,7 +21,8 @@ class MainFirstFragment:BaseFragment<FragmentMainHomepageBinding>(){
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
+        val sdCardPath  = Environment.getExternalStorageDirectory().path
+        LogUtil.d("sdCardPath",sdCardPath)
     }
 
 }
