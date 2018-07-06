@@ -104,7 +104,7 @@ public class StateView extends RelativeLayout {
     public void setLoadingImageResource(int resourceId){
         loadingIv.setImageResource(resourceId);
     }
-    
+
     @BindingAdapter("retryClick")
     public static void bindOnRetryClickListener(StateView view,OnClickListener listener){
         view.setOnRetryClickListener(listener);

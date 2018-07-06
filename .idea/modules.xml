@@ -3,11 +3,18 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SycFramework.iml" filepath="$PROJECT_DIR$/SycFramework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SycFramework.iml" filepath="$PROJECT_DIR$/SycFramework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/acount/acount.iml" filepath="$PROJECT_DIR$/acount/acount.iml" />
       <module fileurl="file://$PROJECT_DIR$/acount/acount.iml" filepath="$PROJECT_DIR$/acount/acount.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business.iml" filepath="$PROJECT_DIR$/business/business.iml" />
       <module fileurl="file://$PROJECT_DIR$/business/business.iml" filepath="$PROJECT_DIR$/business/business.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/entry/entry.iml" filepath="$PROJECT_DIR$/entry/entry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/entry/entry.iml" filepath="$PROJECT_DIR$/entry/entry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
     </modules>
   </component>
