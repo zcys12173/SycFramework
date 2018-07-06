@@ -28,8 +28,7 @@
             <com.syc.common.widget.StateView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:state="normal"
-                app:loadingImageSrc="@drawable/back"
+                app:state="@{vm.state}"
                 retryClick="@{()->vm.onRetryClick()}"
                 app:contextText="@string/app_name"/>
         </RelativeLayout>

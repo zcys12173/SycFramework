@@ -3,8 +3,11 @@ package com.syc.common.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,14 +16,15 @@ import android.widget.TextView;
 import com.syc.common.R;
 
 /**
+ * 缺省页面
  * Created by shiyucheng on 2018/7/6.
  */
 
 public class StateView extends RelativeLayout {
-    public static final int STATE_NORMAL = 0;
-    public static final int STATE_LOADING = 1;
-    public static final int STATE_ERROR = 2;
-    public static final int STATE_EMPTY = 3;
+    public static final int STATE_NORMAL = 0;//不显示
+    public static final int STATE_LOADING = 1;//加载中
+    public static final int STATE_ERROR = 2;//网络错误
+    public static final int STATE_EMPTY = 3;//数据为空
     private ImageView loadingIv;
     private TextView contextTv;
     private Button retryBtn;
@@ -46,8 +50,12 @@ public class StateView extends RelativeLayout {
             String content = a.getString(R.styleable.StateView_contextText);
             Drawable drawable = a.getDrawable(R.styleable.StateView_loadingImageSrc);
             state = a.getInt(R.styleable.StateView_state,STATE_NORMAL);
-            loadingIv.setImageDrawable(drawable);
-            contextTv.setText(content);
+            if (drawable != null) {
+                setLoadingImageDrawable(drawable);
+            }else{
+                setLoadingImageResource(R.drawable.state_view_default_anim);
+            }
+            setContextText(content);
             a.recycle();
         }
         refreshView();
@@ -59,26 +67,49 @@ public class StateView extends RelativeLayout {
     private void refreshView(){
         switch (state){
             case STATE_NORMAL:
-                contextTv.setText("normal");
+               setNormalView();
                 break;
             case STATE_LOADING:
-                contextTv.setText("loading");
+                setLoadingView();
                 break;
             case STATE_ERROR:
-                contextTv.setText("error");
+                setErrorView();
                 break;
             case STATE_EMPTY:
-                contextTv.setText("empty");
+                setEmptyView();
                 break;
-
         }
+    }
+
+    private void setNormalView(){
+        setVisibility(View.GONE);
+    }
+
+    private void setLoadingView(){
+        setVisibility(View.VISIBLE);
+        loadingIv.setVisibility(View.VISIBLE);
+        contextTv.setVisibility(View.GONE);
+        retryBtn.setVisibility(View.GONE);
+    }
+    private void setErrorView(){
+        setVisibility(View.VISIBLE);
+        loadingIv.setVisibility(View.GONE);
+        contextTv.setVisibility(View.VISIBLE);
+        retryBtn.setVisibility(View.VISIBLE);
+        contextTv.setText("error");
+    }
+    private void setEmptyView(){
+        setVisibility(View.VISIBLE);
+        loadingIv.setVisibility(View.GONE);
+        contextTv.setVisibility(View.VISIBLE);
+        retryBtn.setVisibility(View.VISIBLE);
+        contextTv.setText("empty");
     }
 
     public void setState(int state){
         this.state = state;
         refreshView();
     }
-
 
     public void setOnRetryClickListener(OnClickListener listener){
         if (retryBtn !=  null) {
@@ -98,11 +129,37 @@ public class StateView extends RelativeLayout {
         }
     }
     public void setLoadingImageDrawable(Drawable drawable){
-        loadingIv.setImageDrawable(drawable);
+        if(drawable == null){
+            return;
+        }
+        if (loadingIv != null) {
+            stopAnimation();
+            loadingIv.setImageDrawable(drawable);
+            startAnimation();
+        }
     }
 
     public void setLoadingImageResource(int resourceId){
-        loadingIv.setImageResource(resourceId);
+        if (loadingIv != null) {
+            stopAnimation();
+            loadingIv.setImageResource(resourceId);
+            startAnimation();
+        }
+    }
+
+    private void startAnimation(){
+        if(loadingIv != null && loadingIv.getDrawable() != null && loadingIv.getDrawable() instanceof AnimationDrawable){
+            AnimationDrawable anim = (AnimationDrawable) loadingIv.getDrawable();
+            anim.start();
+        }
+    }
+
+
+    private void stopAnimation(){
+        if(loadingIv != null && loadingIv.getDrawable() != null && loadingIv.getDrawable() instanceof AnimationDrawable){
+            AnimationDrawable anim = (AnimationDrawable) loadingIv.getDrawable();
+            anim.stop();
+        }
     }
 
     @BindingAdapter("retryClick")
