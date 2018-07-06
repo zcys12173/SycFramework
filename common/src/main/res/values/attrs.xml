@@ -11,4 +11,16 @@
         <attr name="centerImageSrc" format="reference" />
         <attr name="centerText" format="string" />
     </declare-styleable>
+
+
+    <declare-styleable name="StateView">
+        <attr name="contextText" format="string|reference" />
+        <attr name="loadingImageSrc" format="reference" />
+        <attr name="state" format="integer">
+            <enum name="normal" value="0"/>
+            <enum name="loading" value="1"/>
+            <enum name="error" value="2"/>
+            <enum name="empty" value="3"/>
+        </attr>
+    </declare-styleable>
 </resources>
