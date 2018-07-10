@@ -9,7 +9,7 @@ import android.view.View;
  */
 
 public class BaseViewHolder extends RecyclerView.ViewHolder {
-    public ViewDataBinding binding;
+    private ViewDataBinding binding;
     public BaseViewHolder(View itemView) {
         super(itemView);
     }
@@ -18,4 +18,9 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         super(binding.getRoot());
         this.binding = binding;
     }
+
+    public <T extends ViewDataBinding> T getBinding(){
+        return (T) binding;
+    }
+
 }

@@ -24,26 +24,27 @@ public abstract class PTRAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), getItemLayout(viewType), null, false);
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), getItemLayout(viewType), parent, false);
         return new BaseViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, final int position) {
+    public void onBindViewHolder(BaseViewHolder holder,  int position) {
+        final int currentPosition = position;
         final T item = list.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClick(item, position);
+                onItemClick(item, currentPosition);
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return onItemLongClick(item, position);
+                return onItemLongClick(item, currentPosition);
             }
         });
-        onBindViewHolder(holder, item, position);
+        onBindViewHolderListener(holder, item, position);
     }
 
     @Override
@@ -53,24 +54,24 @@ public abstract class PTRAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
-    public <E extends T> int getItemType(E item, int position) {
-        return 0;
+    public  int getItemType(T item, int position) {
+        return super.getItemViewType(position);
     }
 
     public int getItemLayout(int viewType) {
         return layoutRes;
     }
 
-    public abstract <H extends BaseViewHolder> void onBindViewHolder(H viewHolder, T item, int position);
+    public abstract  void onBindViewHolderListener(BaseViewHolder viewHolder, T item, int position);
 
-    public <E extends T> void onItemClick(E item, int position) {
+    public  void onItemClick(T item, int position) {
 
     }
 
-    public <E extends T> boolean onItemLongClick(E item, int position) {
+    public boolean onItemLongClick(T item, int position) {
         return false;
     }
 }

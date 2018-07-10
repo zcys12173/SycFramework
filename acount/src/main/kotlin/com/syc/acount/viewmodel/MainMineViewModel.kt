@@ -3,6 +3,7 @@ package com.syc.acount.viewmodel
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.syc.acount.view.AccountsActivity
 import com.syc.acount.view.LoginActivity
 import com.syc.framework.framework.BaseViewModel
 
@@ -15,7 +16,7 @@ class MainMineViewModel : BaseViewModel() {
     }
 
     fun login() {
-        val intent = Intent(context, LoginActivity::class.java)
+        val intent = Intent(context, AccountsActivity::class.java)
         intent.putExtra("params1", "跳转参数")
         startActivityForResult(intent, 1)
     }
