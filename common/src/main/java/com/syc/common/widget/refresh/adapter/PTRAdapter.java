@@ -1,77 +1,66 @@
 package com.syc.common.widget.refresh.adapter;
 
-import android.databinding.DataBindingUtil;
+
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 /**
+ * 适配起
  * Created by shiyucheng on 2018/7/7.
  */
 
-public abstract class PTRAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
-    private List<T> list;
-    private int layoutRes;
+public class PTRAdapter extends BaseAdapter{
 
-    public PTRAdapter(List<T> list, int resourceID) {
-        this.list = list;
-        this.layoutRes = resourceID;
+    @Override
+    public void notifyChanged() {
+
     }
 
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), getItemLayout(viewType), parent, false);
-        return new BaseViewHolder(binding);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder,  int position) {
-        final int currentPosition = position;
-        final T item = list.get(position);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClick(item, currentPosition);
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return onItemLongClick(item, currentPosition);
-            }
-        });
-        onBindViewHolderListener(holder, item, position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder) holder;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return getItemType(list.get(position), position);
-    }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return getSize();
     }
 
-    public  int getItemType(T item, int position) {
-        return super.getItemViewType(position);
+    private class ViewHolder extends RecyclerView.ViewHolder{
+        private ViewDataBinding binding;
+        private RecycleItemViewModel itemVm;
+        public ViewHolder(View itemView) {
+            super(itemView);
+        }
+        public ViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+        }
+
+        public ViewDataBinding getBinding() {
+            return binding;
+        }
+
+        public void setBinding(ViewDataBinding binding) {
+            this.binding = binding;
+        }
+
+        public RecycleItemViewModel getItemVm() {
+            return itemVm;
+        }
+
+        public void setItemVm(RecycleItemViewModel itemVm) {
+            this.itemVm = itemVm;
+        }
     }
 
-    public int getItemLayout(int viewType) {
-        return layoutRes;
-    }
 
-    public abstract  void onBindViewHolderListener(BaseViewHolder viewHolder, T item, int position);
 
-    public  void onItemClick(T item, int position) {
-
-    }
-
-    public boolean onItemLongClick(T item, int position) {
-        return false;
-    }
 }
