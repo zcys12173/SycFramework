@@ -15,8 +15,8 @@ public abstract class BaseAdapter extends RecyclerView.Adapter {
 
     public abstract void notifyChanged();
 
-    public void getItem(int position){
-        list.get(position);
+    public Object getItem(int position){
+        return list.get(position);
     }
 
     public BaseAdapter() {

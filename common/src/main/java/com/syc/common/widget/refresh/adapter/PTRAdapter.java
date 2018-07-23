@@ -6,26 +6,52 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 适配起
  * Created by shiyucheng on 2018/7/7.
  */
 
-public class PTRAdapter extends BaseAdapter{
+public abstract class PTRAdapter extends BaseAdapter {
+    private RecycleItemViewModeFactory itemViewModeFactory;
+    private List<Class<?>> vmTypes;
 
+    public PTRAdapter(RecycleItemViewModeFactory itemViewModeFactory) {
+        this.itemViewModeFactory = itemViewModeFactory;
+        vmTypes = new ArrayList<>();
+    }
     @Override
     public void notifyChanged() {
-
+        notifyDataSetChanged();
     }
 
     @Override
+    public int getItemViewType(int position) {
+        Object item = getItem(position);
+        Class<?> type = itemViewModeFactory.getViewModelType(item);
+        int index = vmTypes.indexOf(type);
+        if (index == -1) {
+            vmTypes.add(type);
+            index = vmTypes.indexOf(type);
+        }
+        return index;
+    }
+
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        RecycleItemViewModel vm = itemViewModeFactory.getItemViewModel(vmTypes.get(viewType));
+        ViewHolder viewHolder = new ViewHolder(itemViewModeFactory.onViewHolderBinding(vm));
+        viewHolder.setItemVm(vm);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
+        viewHolder.getItemVm().OnItemViewChanged(getItem(position));
     }
 
 
@@ -34,12 +60,14 @@ public class PTRAdapter extends BaseAdapter{
         return getSize();
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder{
+    private class ViewHolder extends RecyclerView.ViewHolder {
         private ViewDataBinding binding;
         private RecycleItemViewModel itemVm;
+
         public ViewHolder(View itemView) {
             super(itemView);
         }
+
         public ViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
         }
@@ -60,7 +88,6 @@ public class PTRAdapter extends BaseAdapter{
             this.itemVm = itemVm;
         }
     }
-
 
 
 }
