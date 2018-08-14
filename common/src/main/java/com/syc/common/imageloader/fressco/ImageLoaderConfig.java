@@ -1,4 +1,4 @@
-package com.syc.common.imageloader;
+package com.syc.common.imageloader.fressco;
 
 /**
  * Created by Administrator on 2018\5\10 0010.

@@ -2,8 +2,8 @@ package com.syc.acount.view
 
 import android.os.Bundle
 import com.syc.acount.R
-import com.syc.common.imageloader.DraweeView
-import com.syc.common.imageloader.ImageLoader
+import com.syc.common.imageloader.fressco.DraweeView
+import com.syc.common.imageloader.fressco.ImageLoader
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity
 
 /**
@@ -13,7 +13,7 @@ class SwipeBackTestActivity:SwipeBackActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_swipe_back)
-        val view:DraweeView = findViewById(R.id.image) as DraweeView
+        val view: DraweeView = findViewById(R.id.image) as DraweeView
         ImageLoader.getInstance().loadImage(view,"https://img-blog.csdn.net/20161112180545080")
     }
 }

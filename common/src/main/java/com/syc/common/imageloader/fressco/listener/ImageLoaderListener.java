@@ -1,4 +1,4 @@
-package com.syc.common.imageloader.listener;
+package com.syc.common.imageloader.fressco.listener;
 
 import android.graphics.drawable.Animatable;
 

@@ -1,11 +1,12 @@
 package com.syc.framework.sycframework.model
 
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by shiyucheng on 2018/1/16.
  */
-@RealmClass
-open class User(@PrimaryKey var userName:String?=null, var password:String ? = null):RealmObject()
+@Parcelize
+data class User(var userName: String? = null,
+                var password: String? = null, var role: Int,
+                var email: String, var phone: String) : Parcelable

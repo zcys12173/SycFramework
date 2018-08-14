@@ -1,4 +1,4 @@
-package com.syc.common.imageloader;
+package com.syc.common.imageloader.fressco;
 
 
 /**

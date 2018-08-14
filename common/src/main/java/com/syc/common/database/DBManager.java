@@ -2,12 +2,6 @@ package com.syc.common.database;
 
 import android.content.Context;
 
-import com.syc.common.widget.refresh.adapter.BaseViewHolder;
-import com.syc.common.widget.refresh.adapter.PTRAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -20,7 +14,7 @@ public class DBManager {
     private static final String DEFAULT_NAME = "default_name";
 
 
-    public static void init(Context context){
+    public static void init(Context context) {
         Realm.init(context.getApplicationContext());
     }
 

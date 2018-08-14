@@ -68,8 +68,13 @@ dependencies {
     api rootProject.ext.dependencies["imagepipeline_okhttp3"]
     api rootProject.ext.dependencies["smart_refresh_layout"]
     api rootProject.ext.dependencies["smart_refresh_header"]
-    kapt "com.android.databinding:compiler:3.0.1"
+    kapt "com.android.databinding:compiler:3.1.3"
     //    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    kapt rootProject.ext.dependencies["glide_compiler"]
+    api (rootProject.ext.dependencies["glide"]){
+        exclude group: "com.android.support"
+    }
     api project(':framework')
+
 }
 

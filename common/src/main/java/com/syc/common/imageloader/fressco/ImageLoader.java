@@ -1,9 +1,9 @@
-package com.syc.common.imageloader;
+package com.syc.common.imageloader.fressco;
 
 import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.syc.common.imageloader.listener.ImageLoaderListener;
+import com.syc.common.imageloader.fressco.listener.ImageLoaderListener;
 
 /**
  * 网络图片加载器  基于Fresco

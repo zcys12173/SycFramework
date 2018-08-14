@@ -110,9 +110,9 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':acount')
-    kapt "com.android.databinding:compiler:3.0.1"
+    kapt "com.android.databinding:compiler:3.1.3"
     debugApi rootProject.ext.dependencies["leakcanary"]
-    testApi rootProject.ext.dependencies["leakcanary_no_op"]
+    testImplementation rootProject.ext.dependencies["leakcanary_no_op"]
     releaseApi rootProject.ext.dependencies["leakcanary_no_op"]
     devApi rootProject.ext.dependencies["leakcanary_no_op"]
     implementation project(':business')

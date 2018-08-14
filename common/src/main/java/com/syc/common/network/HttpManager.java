@@ -8,7 +8,7 @@ import com.syc.common.network.config.HttpConfig;
 import java.lang.ref.WeakReference;
 
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -46,7 +46,7 @@ public class HttpManager {
         retrofit = new Retrofit.Builder()
                 .baseUrl(httpConfig.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(OKHttpClientFactory.createHttpClient(wrContext.get()))
                 .build();
     }

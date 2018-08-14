@@ -7,7 +7,7 @@ import com.example.business.BusinessModule
 import com.squareup.leakcanary.LeakCanary
 import com.syc.acount.AccountModule
 import com.syc.common.database.DBManager
-import com.syc.common.imageloader.ImageLoader
+import com.syc.common.imageloader.fressco.ImageLoader
 import com.syc.common.network.HttpManager
 import com.syc.common.network.config.HttpConfig
 import com.syc.framework.BuildConfig

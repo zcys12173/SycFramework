@@ -47,6 +47,10 @@ android {
         enabled true
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     kapt {
         generateStubs = true
     }
@@ -56,7 +60,7 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':common')
-    kapt "com.android.databinding:compiler:3.0.1"
+    kapt "com.android.databinding:compiler:3.1.3"
 }
 repositories {
     mavenCentral()

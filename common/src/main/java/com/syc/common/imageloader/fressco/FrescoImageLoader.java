@@ -1,4 +1,4 @@
-package com.syc.common.imageloader;
+package com.syc.common.imageloader.fressco;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,8 +27,8 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.syc.common.imageloader.listener.ImageLoaderListener;
-import com.syc.common.imageloader.listener.LoadImageListener;
+import com.syc.common.imageloader.fressco.listener.ImageLoaderListener;
+import com.syc.common.imageloader.fressco.listener.LoadImageListener;
 import com.syc.common.utils.LogUtil;
 
 import javax.annotation.Nullable;

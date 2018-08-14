@@ -1,8 +1,6 @@
 package com.syc.common.widget.refresh;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
-import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -14,12 +12,6 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.syc.common.widget.refresh.adapter.BaseViewHolder;
-import com.syc.common.widget.refresh.adapter.PTRAdapter;
-import com.syc.common.widget.refresh.adapter.PTRAdapterProxy;
-import com.syc.common.widget.refresh.adapter.RecycleItemViewModel;
-
-import java.util.List;
 
 /**
  * Created by shiyucheng on 2018/5/20.
@@ -63,15 +55,15 @@ public class PullToRefreshRecycleView extends SmartRefreshLayout {
         recyclerView.setAdapter(adapter);
     }
 
-    public void setLayoutManager(RecyclerView.LayoutManager layoutManager){
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    public void setAdapterProxy(PTRAdapterProxy adapterProxy) {
-    }
-
-    @BindingAdapter("adapterProxy")
-    public static void setPTRAdapterProxy(PullToRefreshRecycleView view,PTRAdapterProxy proxy){
-        view.setAdapterProxy(proxy);
-    }
+//    public void setAdapterProxy(PTRAdapterProxy adapterProxy) {
+//    }
+//
+//    @BindingAdapter("adapterProxy")
+//    public static void setPTRAdapterProxy(PullToRefreshRecycleView view,PTRAdapterProxy proxy){
+//        view.setAdapterProxy(proxy);
+//    }
 }

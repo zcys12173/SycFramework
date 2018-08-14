@@ -5,9 +5,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.syc.acount.R
 import com.syc.acount.databinding.ActivityAccountsBinding
-import com.syc.acount.databinding.ItemAccountsBinding
-import com.syc.common.widget.refresh.adapter.BaseViewHolder
-import com.syc.common.widget.refresh.adapter.PTRAdapter
 import com.syc.framework.framework.BaseActivity
 import com.syc.framework.sycframework.model.Account
 
@@ -30,10 +27,10 @@ class AccountsActivity : BaseActivity<ActivityAccountsBinding>() {
         accounts.add(account2)
         binding.prtAccounts.setLayoutManager(manager)
 //        binding.prtAccounts.setAdapter( AccountsAdapter(baseContext, accounts))
-        binding.prtAccounts.setAdapter(object : PTRAdapter<Account>(accounts,R.layout.item_accounts) {
-            override fun onBindViewHolderListener(viewHolder: BaseViewHolder?, item: Account?, position: Int) {
-                viewHolder?.getBinding<ItemAccountsBinding>()?.name?.text = item?.name
-            }
+//        binding.prtAccounts.setAdapter(object : PTRAdapter<Account>(accounts, R.layout.item_accounts) {
+//            override fun onBindViewHolderListener(viewHolder: BaseViewHolder?, item: Account?, position: Int) {
+//                viewHolder?.getBinding<ItemAccountsBinding>()?.name?.text = item?.name
+//            }
 
 
 //
@@ -44,6 +41,6 @@ class AccountsActivity : BaseActivity<ActivityAccountsBinding>() {
 //            override fun <String : Any?> getItemType(item: Account, position: Int): Int {
 //                return super.getItemType(item, position)
 //            }
-        })
-    }
+//    })
+}
 }

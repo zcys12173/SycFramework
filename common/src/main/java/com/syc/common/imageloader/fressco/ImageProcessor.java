@@ -1,4 +1,4 @@
-package com.syc.common.imageloader;
+package com.syc.common.imageloader.fressco;
 
 import com.facebook.imagepipeline.request.BasePostprocessor;
 
