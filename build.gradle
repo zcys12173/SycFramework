@@ -2,12 +2,13 @@
 
 buildscript {
     ext.kotlin_version = "1.2.51"
+    ext.gradle_version = "3.1.3"
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.realm:realm-gradle-plugin:4.3.1"
 
@@ -33,12 +34,12 @@ ext {
 
     dependencies = [
             "appcompat"            : "com.android.support:appcompat-v7:26.1.0",
-            "kotlin_stdlib"        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            "kotlin_stdlib"        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             "constraint"           : "com.android.support.constraint:constraint-layout:1.0.2",
             "junit"                : "junit:junit:4.12",
             "test_runner"          : "com.android.support.test:runner:1.0.1",
             "espresso"             : "com.android.support.test.espresso:espresso-core:3.0.1",
-            "databinding"          : "com.android.databinding:compiler:3.0.1",
+            "databinding"          : "com.android.databinding:compiler:3.1.3",
             "design"               : "com.android.support:design:26.1.0",
             "okhttp3"              : "com.squareup.okhttp3:okhttp:3.8.0",
             "retrofit"             : "com.squareup.retrofit2:retrofit:2.3.0",

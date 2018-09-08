@@ -2,7 +2,7 @@ package com.syc.common.network;
 
 import android.content.Context;
 
-import com.syc.common.network.interceptor.HeaderIntercepor;
+import com.syc.common.network.interceptor.HeaderInterceptor;
 import com.syc.common.network.utils.OkHttpsUtils;
 import com.syc.common.utils.LogUtil;
 
@@ -86,7 +86,7 @@ public class OKHttpClientFactory {
         @Override
         protected void buildOKHttpClient(Context context, OkHttpClient.Builder builder) {
             super.buildOKHttpClient(context, builder);
-            builder.addNetworkInterceptor(new HeaderIntercepor(context));
+            builder.addNetworkInterceptor(new HeaderInterceptor(context));
         }
     }
 
@@ -94,7 +94,7 @@ public class OKHttpClientFactory {
         @Override
         protected void buildOKHttpClient(Context context, OkHttpClient.Builder builder) {
             super.buildOKHttpClient(context, builder);
-            builder.addNetworkInterceptor(new HeaderIntercepor(context));
+            builder.addNetworkInterceptor(new HeaderInterceptor(context));
         }
     }
 }

@@ -26,8 +26,7 @@ class NewAccountViewModel : BaseViewModel() {
     fun create() {
         var name: String = MD5Util.md5(SharedPreferencesUtil.get(context, SP_KEY_USERNAME, "") as String + SharedPreferencesUtil.get(context, SP_KEY_PASSWORD, "") as String)
         DBManager.getRealmInstance(name).executeTransactionAsync(Realm.Transaction { realm ->
-            var account = Account(title.get(), userName.get(), password.get())
-            realm.copyToRealmOrUpdate(account)
+
         }, Realm.Transaction.OnSuccess {
             finish()
         })

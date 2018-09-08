@@ -20,6 +20,7 @@ class LoginViewModel : RxBaseViewModel() {
     var userName: ObservableField<String> = ObservableField()
     var password: ObservableField<String> = ObservableField()
 
+
     init {
         userName.set("")
         password.set("")

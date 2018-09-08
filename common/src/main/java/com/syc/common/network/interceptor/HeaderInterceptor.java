@@ -13,8 +13,8 @@ import okhttp3.Response;
  * okHttp headerpareams 拦截器
  */
 
-public class HeaderIntercepor implements Interceptor {
-    public HeaderIntercepor(Context context) {
+public class HeaderInterceptor implements Interceptor {
+    public HeaderInterceptor(Context context) {
 
     }
 

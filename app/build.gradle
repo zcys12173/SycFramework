@@ -17,8 +17,8 @@ android {
             storeFile file('/Users/liguiting/Documents/github/SycFramework/syc.keystore')
         }
     }
-    compileSdkVersion 26
     defaultConfig {
+        compileSdkVersion rootProject.ext.compileSdkVersion
         applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -110,7 +110,6 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':acount')
-    kapt "com.android.databinding:compiler:3.1.3"
     debugApi rootProject.ext.dependencies["leakcanary"]
     testImplementation rootProject.ext.dependencies["leakcanary_no_op"]
     releaseApi rootProject.ext.dependencies["leakcanary_no_op"]

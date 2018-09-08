@@ -1,1 +1,1 @@
-include ':app', ':framework', ':acount', ':business', ':common', ':entry', ':rcommon'
+include ':app', ':framework', ':acount', ':business', ':common', ':entry'
