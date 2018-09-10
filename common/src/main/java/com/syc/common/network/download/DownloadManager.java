@@ -1,6 +1,5 @@
 package com.syc.common.network.download;
 
-import android.annotation.SuppressLint;
 import android.os.Environment;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,28 +39,28 @@ public class DownloadManager {
         return instance;
     }
 
-    public void download(@NotNull String url,@NotNull DownloadCallback callback) {
+    public DEntry download(@NotNull String url, @NotNull DownloadCallback callback) {
         String name = url.substring(url.lastIndexOf("/"));
-        download(url, defaultDownloadPath, name, callback);
+        return download(url, defaultDownloadPath, name, callback);
     }
 
-    @SuppressLint("CheckResult")
-    public synchronized void download(@NotNull final String url, String path, String name,@NotNull DownloadCallback callback) {
+    public synchronized DEntry download(@NotNull final String url, String path, String name, @NotNull DownloadCallback callback) {
         if (downloadMap.containsKey(url)) {
             callback.failed(new DownLoadException(url + " is downloading"));
-            return;
+            return null;
         }
-        if(downloadMap.size() >= MAX_SIZE){
-            callback.failed(new DownLoadException("The max download task number is "+MAX_SIZE));
-            return;
+        if (downloadMap.size() >= MAX_SIZE) {
+            callback.failed(new DownLoadException("The max download task number is " + MAX_SIZE));
+            return null;
         }
+        DEntry entry = new DEntry();
         Disposable disposable = Observable.just(getDownloadInfo(url, path, name))
                 .filter(new CheckInfoPredicate())
                 .map(new CreateInfoFunction())
                 .flatMap(new Function<DownloadInfo, ObservableSource<DownloadResult>>() {
                     @Override
                     public ObservableSource<DownloadResult> apply(DownloadInfo downloadInfo) {
-                        return new DownloadObservable(downloadInfo, client);
+                        return Observable.create(new DownloadSubscribe(downloadInfo, client));
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,6 +77,9 @@ public class DownloadManager {
                     }
                 });
         downloadMap.put(url, disposable);
+        entry.setDisposable(disposable);
+        entry.setUrl(url);
+        return entry;
     }
 
 

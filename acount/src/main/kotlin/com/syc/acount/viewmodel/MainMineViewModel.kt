@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.syc.acount.view.AccountsActivity
 import com.syc.acount.view.LoginActivity
 import com.syc.acount.view.RegisterActivity
+import com.syc.common.network.download.DEntry
 import com.syc.common.network.download.DownloadManager
 import com.syc.common.utils.LogUtil
 import com.syc.framework.framework.BaseViewModel
@@ -15,6 +16,7 @@ import com.syc.framework.sycframework.model.User
  * Created by shiyucheng on 2018/5/28.
  */
 class MainMineViewModel : BaseViewModel() {
+    private var entry:DEntry?=null;
     var progress:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,7 +29,7 @@ class MainMineViewModel : BaseViewModel() {
     }
 
     fun download(){
-        DownloadManager.getInstance().download("https://dl.google.com/android/installer_r24.4.1-windows.exe", object : DownloadManager.DownloadCallback {
+        entry = DownloadManager.getInstance().download("http://dl.google.com/android/installer_r24.4.1-windows.exe", object : DownloadManager.DownloadCallback {
             override fun prepare() {
                 Toast("prepare")
             }
@@ -52,6 +54,10 @@ class MainMineViewModel : BaseViewModel() {
             }
 
         })
+    }
+
+    fun cancel(){
+        entry?.cancel()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

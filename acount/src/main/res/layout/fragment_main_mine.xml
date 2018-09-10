@@ -31,12 +31,21 @@
                 android:text="登录"/>
 
             <Button
+                android:id="@+id/btn_download"
                 android:layout_below="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:onClick="@{()->vm.download()}"
                 android:text="下载"/>
+
+            <Button
+                android:layout_below="@+id/btn_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:onClick="@{()->vm.cancel()}"
+                android:text="取消"/>
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"

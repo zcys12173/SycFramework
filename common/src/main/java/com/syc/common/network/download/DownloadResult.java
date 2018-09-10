@@ -9,12 +9,14 @@ public class DownloadResult {
     public static final int STATUS_DOWNLOADING = 2;
     public static final int STATUS_SUCCEED = 3;
     public static final int STATUS_FAILED = 4;
+    public static final int STATUS_PAUSE = 5;
+
     public long currentSize;
     public long totalSize;
     public String name;
     public String path;
     public int status;
-
+    public String url;
     /**
      * 获取当前下载进度
      * @return
