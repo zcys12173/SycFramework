@@ -19,7 +19,7 @@ import com.syc.framework.framework.FrameworkApplication
 class MyApplication : FrameworkApplication() {
     override fun onCreate() {
         super.onCreate()
-        if(TextUtils.equals(BuildConfig.BUILD_TYPE,"dev")){
+        if (TextUtils.equals(BuildConfig.BUILD_TYPE, "dev")) {
             optimizeCode(this)
         }
 

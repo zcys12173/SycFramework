@@ -5,6 +5,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         compileSdkVersion rootProject.ext.compileSdkVersion
         minSdkVersion rootProject.ext.minSdkVersion
@@ -53,4 +56,24 @@ dependencies {
     kapt rootProject.ext.dependencies["databinding"]
 //    compile 'cn.bmob.android:bmob-sdk:3.5.0'
 }
+
+/** 以下开始是将Android Library上传到jcenter的相关配置**/
+apply plugin: 'com.novoda.bintray-release'//添加
+//项目主页
+def siteUrl = 'https://github.com/zcys12173/SycFramework'
+publish{
+    repoName = 'maven'//（bintray上Repository的名字）
+    userOrg = 'syc'//bintray上的Organization的名字）
+    groupId = 'com.syc.mvvm' //compile引用时的第1部分groupId
+    artifactId = 'framework'//(bintray.package的名字)  compile引用时的第2部分项目名
+    publishVersion = '1.0.0'//版本号    compile引用时的第3部分版本号
+    desc = 'android mvvm framework'//描述，不重要
+    website = siteUrl//项目主页
+}
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
 

@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 android {
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         compileSdkVersion rootProject.ext.compileSdkVersion
         minSdkVersion rootProject.ext.minSdkVersion

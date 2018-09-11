@@ -5,6 +5,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         compileSdkVersion rootProject.ext.compileSdkVersion
         minSdkVersion rootProject.ext.minSdkVersion
@@ -51,6 +54,7 @@ dependencies {
     api rootProject.ext.dependencies["test_runner"]
     api rootProject.ext.dependencies["espresso"]
     api rootProject.ext.dependencies["okhttp3"]
+    api rootProject.ext.dependencies["mvvm_framework"]
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["converter_gson"]
     api rootProject.ext.dependencies["adapter_rxjava"]
@@ -65,13 +69,11 @@ dependencies {
     api rootProject.ext.dependencies["imagepipeline_okhttp3"]
     api rootProject.ext.dependencies["smart_refresh_layout"]
     api rootProject.ext.dependencies["smart_refresh_header"]
-//    kapt rootProject.ext.dependencies["databinding"]
+    //    kapt rootProject.ext.dependencies["databinding"]
     //    compile 'cn.bmob.android:bmob-sdk:3.5.0'
     kapt rootProject.ext.dependencies["glide_compiler"]
-    api (rootProject.ext.dependencies["glide"]){
+    api(rootProject.ext.dependencies["glide"]) {
         exclude group: "com.android.support"
     }
-    api project(':framework')
-
 }
 

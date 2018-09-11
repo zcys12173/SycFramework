@@ -9,6 +9,9 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
 android {
+    lintOptions {
+        abortOnError false
+    }
     signingConfigs {
         syc {
             keyAlias 'syc'
@@ -85,7 +88,6 @@ android {
         }
 
         release {
-            buildConfigField 'String', 'URI', 'http://www.releasehost.com/'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField('String', 'URL', rootProject.ext.url_online)
@@ -109,11 +111,11 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api project(':acount')
     debugApi rootProject.ext.dependencies["leakcanary"]
     testImplementation rootProject.ext.dependencies["leakcanary_no_op"]
     releaseApi rootProject.ext.dependencies["leakcanary_no_op"]
     devApi rootProject.ext.dependencies["leakcanary_no_op"]
+    implementation project(':acount')
     implementation project(':business')
     implementation project(':entry')
 }
