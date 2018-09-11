@@ -6,12 +6,13 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url "https://dl.bintray.com/syc/maven" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.realm:realm-gradle-plugin:4.3.1"
-
+        classpath 'com.novoda:bintray-release:0.8.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -60,7 +61,8 @@ ext {
             "leakcanary"           : "com.squareup.leakcanary:leakcanary-android:1.5",
             "leakcanary_no_op"     : "com.squareup.leakcanary:leakcanary-android-no-op:1.5",
             "glide"                : "com.github.bumptech.glide:glide:4.7.1",
-            "glide_compiler"        :"com.github.bumptech.glide:compiler:4.7.1",
+            "glide_compiler"       : "com.github.bumptech.glide:compiler:4.7.1",
+            "mvvm_framework"       : "com.syc.mvvm:framework:1.0.0",
     ]
 
     urls = [
@@ -77,6 +79,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://dl.bintray.com/syc/maven" }
     }
 }
 
