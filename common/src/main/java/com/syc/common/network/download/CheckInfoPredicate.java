@@ -8,7 +8,7 @@ import io.reactivex.functions.Predicate;
 public class CheckInfoPredicate implements Predicate<DownloadInfo> {
     @Override
     public boolean test(DownloadInfo info) throws Exception {
-        //todo 检测条件是否满足
+
         return true;
     }
 }

@@ -29,7 +29,7 @@ class MainMineViewModel : BaseViewModel() {
     }
 
     fun download(){
-        entry = DownloadManager.getInstance().download("http://dl.google.com/android/installer_r24.4.1-windows.exe", object : DownloadManager.DownloadCallback {
+        entry = DownloadManager.getInstance().download("http://down.gome.com.cn/g/120/Gome/GomeEShop.apk?down.myapp.com", object : DownloadManager.DownloadCallback {
             override fun prepare() {
                 Toast("prepare")
             }

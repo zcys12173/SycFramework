@@ -1,5 +1,7 @@
 package com.syc.common.network.download;
 
+import java.util.Map;
+
 import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 
@@ -9,7 +11,15 @@ import retrofit2.Call;
 public class DEntry {
     private String url;
     private Disposable disposable;
-    private Call call;
+    private Map map;
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
 
     void setUrl(String url) {
         this.url = url;
@@ -17,10 +27,6 @@ public class DEntry {
 
     void setDisposable(Disposable disposable) {
         this.disposable = disposable;
-    }
-
-    void setCall(Call call) {
-        this.call = call;
     }
 
     public String getUrl() {
@@ -31,17 +37,10 @@ public class DEntry {
         return disposable;
     }
 
-    public Call getCall() {
-        return call;
-    }
-
     public void cancel(){
         if(disposable != null && !disposable.isDisposed()){
             disposable.dispose();
-        }
-
-        if(call != null && call.isExecuted() && !call.isCanceled()){
-            call.cancel();
+            map.remove(url);
         }
     }
 }

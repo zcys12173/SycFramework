@@ -2,6 +2,7 @@ package com.syc.common.network.download;
 
 import android.util.Log;
 
+import com.syc.common.database.DBManager;
 import com.syc.common.utils.LogUtil;
 
 import java.io.File;
@@ -23,37 +24,45 @@ import okhttp3.ResponseBody;
  * Created by shiyucheng on 2018/9/7.
  */
 public class DownloadSubscribe implements ObservableOnSubscribe<DownloadResult> {
-    private DownloadInfo info;
+    private DBEntry dbEntry;
     private OkHttpClient client;
 
-    DownloadSubscribe(DownloadInfo info, OkHttpClient client) {
-        this.info = info;
+    DownloadSubscribe(DBEntry dbEntry, OkHttpClient client) {
+        this.dbEntry = dbEntry;
         this.client = client;
     }
 
     @Override
     public void subscribe(ObservableEmitter<DownloadResult> emitter) {
         DownloadResult result = new DownloadResult();
-        result.path = info.path + File.pathSeparator + info.name;
+        result.path = dbEntry.getPath() + File.pathSeparator + dbEntry.getName();
+        result.name = dbEntry.getName();
+        result.url = dbEntry.getUrl();
+        result.currentSize = dbEntry.getStart();
+
         result.status = DownloadResult.STATUS_PREPARE;
         LogUtil.d("DownloadSubscribe", "prepare");
         emitter.onNext(result);
         InputStream is = null;
         OutputStream os = null;
         try {
-            Request request = new Request.Builder()
-                    .addHeader("RANGE", "bytes=" + info.start + "-")
-                    .url(info.url)
+            Request.Builder builder = new Request.Builder();
+            if (dbEntry.getStart() != 0 && dbEntry.getTotalSize() != 0) {
+                result.totalSize = dbEntry.getTotalSize();
+                builder.addHeader("RANGE", "bytes=" + dbEntry.getStart() + "-");
+            }
+            Request request = builder
+                    .url(dbEntry.getUrl())
                     .build();
             Call call = client.newCall(request);
             result.status = DownloadResult.STATUS_START;
             emitter.onNext(result);
             LogUtil.d("DownloadSubscribe", "start");
             Response response = call.execute();
-            File file = new File(info.path, info.name);
+            File file = new File(dbEntry.getPath(), dbEntry.getName());
             ResponseBody responseBody = response.body();
             is = responseBody.byteStream();
-            result.totalSize = responseBody.contentLength();
+            result.totalSize = result.totalSize == 0?responseBody.contentLength():result.totalSize ;
             os = new FileOutputStream(file, true);
             byte[] buffer = new byte[2048];//缓冲数组2kB
             int len;
@@ -64,9 +73,9 @@ public class DownloadSubscribe implements ObservableOnSubscribe<DownloadResult> 
                 os.write(buffer, 0, len);
                 result.currentSize += len;
                 //每下载3%  通知一次
-                LogUtil.d("DownloadSubscribe", "currentSize:" + result.currentSize +
-                        "------totalSize:" + result.totalSize + "------totalProgress:"
-                        + result.getProgress() + "------currentProgress:" + currentProgress);
+//                LogUtil.d("DownloadSubscribe", "currentSize:" + result.currentSize +
+//                        "------totalSize:" + result.totalSize + "------totalProgress:"
+//                        + result.getProgress() + "------currentProgress:" + currentProgress);
                 if ((result.getProgress() - currentProgress) > 3) {
                     LogUtil.d("DownloadSubscribe", "progress");
                     emitter.onNext(result);
@@ -113,5 +122,16 @@ public class DownloadSubscribe implements ObservableOnSubscribe<DownloadResult> 
 
     private void save2Db(DownloadResult result) {
         Log.d("DownloadSubscribe", "save2Db");
+        DBEntry entry = new DBEntry();
+        entry.setId(dbEntry.getId());
+        entry.setPath(dbEntry.getPath());
+        entry.setName(dbEntry.getName());
+        entry.setUrl(dbEntry.getUrl());
+        entry.setStart(result.currentSize);
+        entry.setStatus(result.status);
+        entry.setTotalSize(result.totalSize);
+        DBManager.getDefaultInstance().beginTransaction();
+        DBManager.getDefaultInstance().copyToRealmOrUpdate(entry);
+        DBManager.getDefaultInstance().commitTransaction();
     }
 }

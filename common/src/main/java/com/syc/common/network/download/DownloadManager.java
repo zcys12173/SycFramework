@@ -21,7 +21,7 @@ import okhttp3.OkHttpClient;
 public class DownloadManager {
     private static int MAX_SIZE = 5;
     private static DownloadManager instance;
-    private String defaultDownloadPath = Environment.getExternalStorageDirectory().getPath() + File.separator + "download";
+    private String defaultDownloadPath = Environment.getExternalStorageDirectory().getPath() + File.separator + "download"+File.separator;
     private ConcurrentHashMap<String, Disposable> downloadMap;
     private OkHttpClient client;
 
@@ -40,27 +40,24 @@ public class DownloadManager {
     }
 
     public DEntry download(@NotNull String url, @NotNull DownloadCallback callback) {
-        String name = url.substring(url.lastIndexOf("/"));
+        String name = url.substring(url.lastIndexOf("/")+1);
         return download(url, defaultDownloadPath, name, callback);
     }
 
     public synchronized DEntry download(@NotNull final String url, String path, String name, @NotNull DownloadCallback callback) {
-        if (downloadMap.containsKey(url)) {
-            callback.failed(new DownLoadException(url + " is downloading"));
-            return null;
-        }
-        if (downloadMap.size() >= MAX_SIZE) {
-            callback.failed(new DownLoadException("The max download task number is " + MAX_SIZE));
+        if(!canAddToTasks(url)){
+            callback.failed(new DownLoadException("add download task failed,the max task num is "+MAX_SIZE));
             return null;
         }
         DEntry entry = new DEntry();
+        entry.setMap(downloadMap);
         Disposable disposable = Observable.just(getDownloadInfo(url, path, name))
                 .filter(new CheckInfoPredicate())
                 .map(new CreateInfoFunction())
-                .flatMap(new Function<DownloadInfo, ObservableSource<DownloadResult>>() {
+                .flatMap(new Function<DBEntry, ObservableSource<DownloadResult>>() {
                     @Override
-                    public ObservableSource<DownloadResult> apply(DownloadInfo downloadInfo) {
-                        return Observable.create(new DownloadSubscribe(downloadInfo, client));
+                    public ObservableSource<DownloadResult> apply(DBEntry dbEntry) {
+                        return Observable.create(new DownloadSubscribe(dbEntry, client));
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -88,8 +85,22 @@ public class DownloadManager {
         info.name = name;
         info.url = url;
         info.path = path;
-        //todo 本地检测文件是否已经下载过，以及下载进度
         return info;
+    }
+
+    private boolean canAddToTasks(String url){
+        if (downloadMap.containsKey(url) ) {
+           if(downloadMap.get(url).isDisposed()){
+               downloadMap.remove(url);
+               return true;
+           }else{
+               return false;
+           }
+        }
+        if (downloadMap.size() >= MAX_SIZE) {
+          return false;
+        }
+        return true;
     }
 
 

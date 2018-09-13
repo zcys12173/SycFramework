@@ -10,6 +10,7 @@ import com.syc.common.database.DBManager
 import com.syc.common.imageloader.fressco.ImageLoader
 import com.syc.common.network.HttpManager
 import com.syc.common.network.config.HttpConfig
+import com.syc.common.utils.LogUtil
 import com.syc.framework.BuildConfig
 import com.syc.framework.framework.FrameworkApplication
 
@@ -31,6 +32,7 @@ class MyApplication : FrameworkApplication() {
         HttpManager.getInstance().init(applicationContext, config)
         DBManager.init(this)
         ImageLoader.init(this)
+        LogUtil.DEBUG = true
     }
 
     /**

@@ -35,6 +35,7 @@ public class SuccessConsumer implements FinishConsumer<DownloadResult> {
             case DownloadResult.STATUS_SUCCEED:
                 finish();
                 if (callback != null) {
+                    callback.progress(100);
                     callback.success(result.path);
                 }
                 break;
