@@ -21,8 +21,6 @@ class MainFirstFragment:BaseFragment<FragmentMainHomepageBinding>(){
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        val sdCardPath  = Environment.getExternalStorageDirectory().path
-        LogUtil.d("sdCardPath",sdCardPath)
     }
 
 }

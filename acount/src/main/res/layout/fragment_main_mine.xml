@@ -63,6 +63,14 @@
                 android:progress="@{vm.progress}"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="163dp" />
+            <com.syc.common.imageloader.NetImageView
+                android:id="@+id/iv"
+                app:radius="50"
+                android:scaleType="centerCrop"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/progressBar"
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.syc.acount.R
 import com.syc.acount.databinding.FragmentMainMineBinding
 import com.syc.acount.viewmodel.MainMineViewModel
+import com.syc.common.imageloader.ImageLoader
 import com.syc.framework.framework.BaseFragment
 import com.syc.framework.framework.ViewModelFactory
 
@@ -13,7 +14,7 @@ import com.syc.framework.framework.ViewModelFactory
  */
 
 class MainMineFragment:BaseFragment<FragmentMainMineBinding>(){
-
+    val url = "http://img5.imgtn.bdimg.com/it/u=415293130,2419074865&fm=27&gp=0.jpg"
     override fun getContent(): Int {
         return R.layout.fragment_main_mine
     }
@@ -22,7 +23,7 @@ class MainMineFragment:BaseFragment<FragmentMainMineBinding>(){
         val vm = ViewModelFactory.create(context,MainMineViewModel::class.java)
         addViewModel(vm)
         binding.vm = vm
-
+        ImageLoader.getInstance().with(context).url(url).into(binding.iv)
     }
 
 }

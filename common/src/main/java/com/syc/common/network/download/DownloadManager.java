@@ -17,16 +17,17 @@ import okhttp3.OkHttpClient;
 
 /**
  * Created by shiyucheng on 2018/9/7.
+ * 下载管理器
  */
 public class DownloadManager {
-    private static int MAX_SIZE = 5;
+    private static int MAX_SIZE = 3;
     private static DownloadManager instance;
     private String defaultDownloadPath = Environment.getExternalStorageDirectory().getPath() + File.separator + "download"+File.separator;
     private ConcurrentHashMap<String, Disposable> downloadMap;
     private OkHttpClient client;
 
     private DownloadManager() {
-        downloadMap = new ConcurrentHashMap<String, Disposable>();
+        downloadMap = new ConcurrentHashMap<>();
         client = new OkHttpClient.Builder().build();
     }
 
@@ -97,10 +98,7 @@ public class DownloadManager {
                return false;
            }
         }
-        if (downloadMap.size() >= MAX_SIZE) {
-          return false;
-        }
-        return true;
+        return downloadMap.size() < MAX_SIZE;
     }
 
 

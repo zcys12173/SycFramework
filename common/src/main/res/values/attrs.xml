@@ -23,4 +23,8 @@
             <enum name="empty" value="3"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="NetImageView">
+        <attr name="radius" format="float"/>
+    </declare-styleable>
 </resources>
