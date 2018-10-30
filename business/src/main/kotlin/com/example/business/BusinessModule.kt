@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import com.example.business.view.MainBusinessFragment
 import com.syc.common.utils.LogUtil
-import com.syc.common.utils.ToastUtils
 import com.syc.framework.router.Router
 
 /**
@@ -26,7 +25,7 @@ object BusinessModule {
                 bundle.putString("name", "返回数据")
                 pipe.onSucceed(bundle)
             } else {
-                ToastUtils.showToast(pipe.activityLauncher.context, "没有找到匹配的Activity")
+//                ToastUtils.showToast(pipe.activityLauncher.context, "没有找到匹配的Activity")
             }
         })
         Router.getInstance().register("/business/getMainBusinessFragment", { pipe ->

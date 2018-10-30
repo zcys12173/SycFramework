@@ -68,7 +68,7 @@ ext {
     ]
 
     urls = [
-            url_dev = "\"http://39.106.130.88:8080/Record/\"",
+            url_dev = "\"http://10.0.2.2:8080/Record/\"",
             url_test = "\"http://www.test.com\"",
             url_pre = "\"http://www.pre.com\"",
             url_online = "\"http://www.online.com\"",

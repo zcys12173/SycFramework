@@ -1,26 +1,27 @@
 package com.syc.acount.view
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
 import com.syc.acount.R
 import com.syc.acount.databinding.FragmentMainHomepageBinding
-import com.syc.acount.databinding.FragmentMainMineBinding
-import com.syc.common.utils.LogUtil
+import com.syc.acount.viewmodel.FIrstFragmentViewModel
 import com.syc.framework.framework.BaseFragment
+import com.syc.framework.framework.ViewModelFactory
 
 /**
  *
  * Created by shiyucheng on 2018\5\21 0021.
  */
 
-class MainFirstFragment:BaseFragment<FragmentMainHomepageBinding>(){
+class MainFirstFragment : BaseFragment<FragmentMainHomepageBinding>() {
 
     override fun getContent(): Int {
         return R.layout.fragment_main_homepage
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        val vm = ViewModelFactory.create(context, FIrstFragmentViewModel::class.java)
+        addViewModel(vm)
+        binding.vm = vm
     }
 
 }

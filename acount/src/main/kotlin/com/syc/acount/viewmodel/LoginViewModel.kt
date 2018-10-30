@@ -30,7 +30,6 @@ class LoginViewModel : RxBaseViewModel() {
         super.onCreate(savedInstanceState)
         val params = intent.getStringExtra("params1")
         Toast("收到参数：$params")
-
     }
 
     fun onLoginClick() {

@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.syc.acount.viewmodel.FIrstFragmentViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -9,10 +16,10 @@
 
         <com.syc.common.widget.CommonTitleBar
             android:layout_width="match_parent"
-            app:leftImageSrc="@drawable/title_bar_back_icon_selector"
+            android:layout_height="wrap_content"
             app:centerText="首页"
-            app:rightLayout="@layout/layout_login_title_right"
-            android:layout_height="wrap_content" />
+            app:leftImageSrc="@drawable/title_bar_back_icon_selector"
+            app:rightLayout="@layout/layout_login_title_right" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,7 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:clickable="true"
+                android:onClick="@{()->vm.onSpeechClick()}"
                 android:text="homePage" />
+
         </RelativeLayout>
     </LinearLayout>
 
