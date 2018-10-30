@@ -39,7 +39,7 @@
         <activity
             android:name="com.syc.acount.view.NewAccountActivity"
             android:screenOrientation="portrait" />
-        
+
         <activity android:name="com.example.business.view.BusinessMainActivity">
             <intent-filter>
                 <action android:name="com.syc.business.open" />
