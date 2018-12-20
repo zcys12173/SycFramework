@@ -118,4 +118,5 @@ dependencies {
     implementation project(':acount')
     implementation project(':business')
     implementation project(':entry')
+    implementation project(':im')
 }

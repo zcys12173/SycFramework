@@ -1,6 +1,7 @@
 package com.syc.demo
 
 import android.app.Application
+import android.content.Intent
 import android.os.StrictMode
 import android.text.TextUtils
 import com.example.business.BusinessModule
@@ -13,6 +14,7 @@ import com.syc.common.network.config.HttpConfig
 import com.syc.common.utils.LogUtil
 import com.syc.framework.BuildConfig
 import com.syc.framework.framework.FrameworkApplication
+import com.syc.framework.im.IMService
 
 /**
  * Created by Administrator on 2018\5\14 0014.
@@ -33,6 +35,7 @@ class MyApplication : FrameworkApplication() {
         DBManager.init(this)
         ImageLoader.init(this)
         LogUtil.DEBUG = true
+        startService(Intent(this,IMService::class.java))
     }
 
     /**

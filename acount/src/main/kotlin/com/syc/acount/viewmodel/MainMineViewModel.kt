@@ -14,7 +14,7 @@ import com.syc.framework.sycframework.model.User
  * Created by shiyucheng on 2018/5/28.
  */
 class MainMineViewModel : BaseViewModel() {
-    private var entry: DEntry? = null;
+    private var entry: DEntry? = null
     var progress: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
 

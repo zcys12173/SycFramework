@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+android {
+    lintOptions {
+        abortOnError false
+    }
+    defaultConfig {
+        compileSdkVersion rootProject.ext.compileSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+
+
+    buildTypes {
+        dev {
+            minifyEnabled false
+        }
+
+        debug {
+            minifyEnabled false
+        }
+        pre {
+            minifyEnabled false
+        }
+        release {
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFile 'proguard-rules.pro'
+            }
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs' //this way we can find the .aar file in libs folder
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    kapt {
+        generateStubs = true
+    }
+    sourceSets { main { java.srcDirs = ['src/main/kotlin/'] } }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':common')
+}
+repositories {
+    mavenCentral()
+}

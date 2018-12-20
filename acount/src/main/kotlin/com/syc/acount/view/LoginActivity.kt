@@ -1,6 +1,10 @@
 package com.syc.acount.view
 
+import android.app.job.JobScheduler
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import com.syc.acount.R
 import com.syc.acount.databinding.ActivityLoginBinding
 import com.syc.framework.framework.BaseActivity
@@ -22,7 +26,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun finish() {
         super.finish()
-        overridePendingTransition(0,R.anim.exit_from_bottom)
+        overridePendingTransition(0, R.anim.exit_from_bottom)
     }
 
 }
