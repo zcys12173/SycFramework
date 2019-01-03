@@ -7,7 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'realm-android'
-
 android {
     lintOptions {
         abortOnError false
@@ -25,47 +24,45 @@ android {
         applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        versionCode  project.VERSION_CODE as int
+        versionName project.VERSION_NAME
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
     }
-//    flavorDimensions 'tier'
-//    productFlavors{
-//        dev{
-//            dimension 'tier'
-//        }
-////
-//        pre{
-//            dimension 'tier'
-//        }
-//
-//        online{
-//            dimension 'tier'
-//        }
-//    }
-    signingConfigs{
+
+    signingConfigs {
         dev {
             File strFile = new File("../syc.keystore")
             storeFile file(strFile)
             storePassword "shiyucheng1"
             keyAlias "syc"
             keyPassword "shiyucheng1"
-
         }
 
         debug {
-
+            File strFile = new File("../syc.keystore")
+            storeFile file(strFile)
+            storePassword "shiyucheng1"
+            keyAlias "syc"
+            keyPassword "shiyucheng1"
         }
 
         pre {
-
+            File strFile = new File("../syc.keystore")
+            storeFile file(strFile)
+            storePassword "shiyucheng1"
+            keyAlias "syc"
+            keyPassword "shiyucheng1"
         }
 
         release {
-
+            File strFile = new File("../syc.keystore")
+            storeFile file(strFile)
+            storePassword "shiyucheng1"
+            keyAlias "syc"
+            keyPassword "shiyucheng1"
         }
     }
     buildTypes {
@@ -78,23 +75,38 @@ android {
         }
 
         debug {
+            debuggable true
+            signingConfig signingConfigs.debug
             minifyEnabled false
             buildConfigField('String', 'URL', rootProject.ext.url_test)
         }
 
         pre {
+            debuggable false
+            signingConfig signingConfigs.pre
             minifyEnabled false
             buildConfigField('String', 'URL', rootProject.ext.url_pre)
         }
 
         release {
+            debuggable false
+            signingConfig signingConfigs.release
             minifyEnabled false
+            zipAlignEnabled true //
+//            shrinkResources true //自动清理未使用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField('String', 'URL', rootProject.ext.url_online)
         }
-
-
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def flavorName = variant.flavorName.startsWith('_') ? variant.flavorName.substring(1) : variant.flavorName
+            outputFileName = "SycFramework_${flavorName}_v${variant.versionName}_${buildTime()}.apk"
+        }
+    }
+
+
     repositories {
         flatDir {
             dirs 'libs' //this way we can find the .aar file in libs folder
@@ -109,6 +121,12 @@ android {
     sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/kotlin/'] } }
 }
 
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format("yyyyMMdd")
+    return formattedDate
+}
+
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     debugApi rootProject.ext.dependencies["leakcanary"]
@@ -120,3 +138,5 @@ dependencies {
     implementation project(':entry')
     implementation project(':im')
 }
+
+

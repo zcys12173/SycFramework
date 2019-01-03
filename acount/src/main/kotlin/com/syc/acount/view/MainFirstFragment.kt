@@ -3,7 +3,7 @@ package com.syc.acount.view
 import android.os.Bundle
 import com.syc.acount.R
 import com.syc.acount.databinding.FragmentMainHomepageBinding
-import com.syc.acount.viewmodel.FIrstFragmentViewModel
+import com.syc.acount.viewmodel.FirstFragmentViewModel
 import com.syc.framework.framework.BaseFragment
 import com.syc.framework.framework.ViewModelFactory
 
@@ -19,7 +19,7 @@ class MainFirstFragment : BaseFragment<FragmentMainHomepageBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        val vm = ViewModelFactory.create(context, FIrstFragmentViewModel::class.java)
+        val vm = ViewModelFactory.create(context, FirstFragmentViewModel::class.java)
         addViewModel(vm)
         binding.vm = vm
     }

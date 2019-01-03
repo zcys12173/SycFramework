@@ -10,7 +10,7 @@ import java.util.*
 /**
  * Created by shiyucheng on 2018/10/11.
  */
-class FIrstFragmentViewModel : RxBaseViewModel() {
+class FirstFragmentViewModel : RxBaseViewModel() {
     private lateinit var tts: TextToSpeech
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

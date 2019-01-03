@@ -1,6 +1,10 @@
 package com.syc.acount.view
 
+import android.app.ActivityOptions
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import com.syc.acount.R
 import com.syc.acount.databinding.FragmentMainMineBinding
 import com.syc.acount.viewmodel.MainMineViewModel
@@ -19,11 +23,16 @@ class MainMineFragment:BaseFragment<FragmentMainMineBinding>(){
         return R.layout.fragment_main_mine
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun init(savedInstanceState: Bundle?) {
         val vm = ViewModelFactory.create(context,MainMineViewModel::class.java)
         addViewModel(vm)
         binding.vm = vm
         ImageLoader.getInstance().with(context).url(url).into(binding.iv)
+        binding.iv.setOnClickListener {
+            val intent = Intent(context,LargeImageActivity::class.java)
+            startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(activity,binding.iv,"image").toBundle())
+        }
     }
 
 }

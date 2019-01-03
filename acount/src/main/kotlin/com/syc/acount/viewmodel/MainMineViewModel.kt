@@ -3,6 +3,8 @@ package com.syc.acount.viewmodel
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Scene
+import com.syc.acount.view.LargeImageActivity
 import com.syc.acount.view.LoginActivity
 import com.syc.common.network.download.DEntry
 import com.syc.common.network.download.DownloadManager

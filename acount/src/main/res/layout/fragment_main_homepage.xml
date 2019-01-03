@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.syc.acount.viewmodel.FIrstFragmentViewModel" />
+            type="com.syc.acount.viewmodel.FirstFragmentViewModel" />
     </data>
 
     <LinearLayout
@@ -34,6 +34,7 @@
                 android:clickable="true"
                 android:onClick="@{()->vm.onSpeechClick()}"
                 android:text="homePage" />
+
 
         </RelativeLayout>
     </LinearLayout>

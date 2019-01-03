@@ -57,6 +57,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.syc.acount.view.LargeImageActivity"/>
+
     </application>
 
 </manifest>

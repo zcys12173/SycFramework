@@ -24,11 +24,15 @@ class IMService :Service (){
         super.onCreate()
         LogUtil.d("IMService","onCreate")
         Thread {
-            socket = Socket("10.0.2.2", 1028)
-            val msg = Message("我是xxx，我要链接")
-            val content = Gson().toJson(msg)
-            sendMessage(content)
-            Thread(MessageReceiverRunnable(socket)).start()
+            try {
+                socket = Socket("10.0.2.2", 1028)
+                val msg = Message("我是xxx，我要链接")
+                val content = Gson().toJson(msg)
+                sendMessage(content)
+                Thread(MessageReceiverRunnable(socket)).start()
+            } catch (e: Exception) {
+                LogUtil.e("IMService",e.toString())
+            }
         }.start()
     }
 
