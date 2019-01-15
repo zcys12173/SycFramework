@@ -101,8 +101,8 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            def flavorName = variant.flavorName.startsWith('_') ? variant.flavorName.substring(1) : variant.flavorName
-            outputFileName = "SycFramework_${flavorName}_v${variant.versionName}_${buildTime()}.apk"
+//            def flavorName = variant.flavorName.startsWith('_') ? variant.flavorName.substring(1) : variant.flavorName
+            outputFileName = "SycFramework_${BUILD_TYPE}_v${variant.versionName}_${buildTime()}.apk"
         }
     }
 

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.IBinder
 import com.google.gson.Gson
 import com.syc.common.utils.LogUtil
-import com.syc.framework.im.Entry.Message
+import com.syc.framework.im.bean.Message
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
@@ -15,7 +15,14 @@ import java.net.Socket
  * Created by shiyucheng on 2018/10/31.
  */
 class IMService :Service (){
+    private var serviceId:Int = -1
     private lateinit var socket:Socket
+
+    private val imBinder = object : IMessageAidlInterface.Stub(){
+
+
+    }
+
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -37,6 +44,7 @@ class IMService :Service (){
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        serviceId = startId
         return START_REDELIVER_INTENT
     }
 
